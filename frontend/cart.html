@@ -1,0 +1,110 @@
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Work+Sans%3Awght%40400%3B500%3B700%3B900"
+    />
+    <title>Shopping Cart</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+  <body>
+    <div class="relative flex min-h-screen flex-col bg-white group/design-root overflow-x-hidden" style='font-family: "Work Sans", "Noto Sans", sans-serif;'>
+      <div class="layout-container flex h-full grow flex-col">
+        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f0f2f5] px-10 py-3">
+            <div class="flex items-center gap-4 text-[#111518]">
+              <div class="size-4">
+                <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_6_319)">
+                    <path
+                      d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24L8.57829 8.57829Z"
+                      fill="currentColor"
+                    ></path>
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_6_319"><rect width="48" height="48" fill="white"></rect></clipPath>
+                  </defs>
+                </svg>
+              </div>
+              <h2 class="text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em]">Shobly</h2>
+            </div>
+            <div class="flex flex-1 justify-end gap-8">
+              <div class="flex items-center gap-9">
+                <a class="text-[#111518] text-sm font-medium leading-normal" href="#">Technology</a>
+                <a class="text-[#111518] text-sm font-medium leading-normal" href="#">Home</a>
+                <a class="text-[#111518] text-sm font-medium leading-normal" href="#">Fashion</a>
+                <a class="text-[#111518] text-sm font-medium leading-normal" href="#">Health</a>
+                <a class="text-[#111518] text-sm font-medium leading-normal" href="#">Sports</a>
+                <a class="text-[#111518] text-sm font-medium leading-normal" href="#">Toys</a>
+              </div>
+              <div class="flex gap-2">
+                <button
+                  class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#2094f3] text-white text-sm font-bold leading-normal tracking-[0.015em]"
+                >
+                  <span class="truncate">Sell</span>
+                </button>
+                <button
+                  class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f0f2f5] text-[#111518] text-sm font-bold leading-normal tracking-[0.015em]"
+                >
+                  <span class="truncate">Sign up</span>
+                </button>
+              </div>
+            </div>
+          </header>
+        <div class="px-40 flex flex-1 justify-center py-5">
+          <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+            <h2 class="text-[#111418] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Shopping Cart</h2>
+            
+            <!-- Product Item -->
+            <div class="flex gap-4 bg-white px-4 py-3 justify-between border-b">
+              <div class="flex items-start gap-4">
+                <div class="bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-lg w-[70px]" style='background-image: url("stability/0d71a626-3a8a-45c1-bc85-f27f77254f81.png");'></div>
+                <div class="flex flex-1 flex-col">
+                  <p class="text-[#111418] text-base font-medium">Nike Air Max 90</p>
+                  <p class="text-[#637588] text-sm">$160</p>
+                  <p class="text-[#637588] text-sm">Size: 6.5, Color: Black</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <div class="flex items-center gap-2">
+                  <button class="h-7 w-7 flex items-center justify-center bg-[#f0f2f4] rounded-full">-</button>
+                  <input class="text-center w-8 border-none bg-transparent" type="number" value="1" min="1" />
+                  <button class="h-7 w-7 flex items-center justify-center bg-[#f0f2f4] rounded-full">+</button>
+                </div>
+                <button class="h-10 px-4 bg-[#2884e6] text-white font-bold rounded-lg">Purchase</button>
+              </div>
+            </div>
+
+            <div class="flex gap-4 bg-white px-4 py-3 justify-between border-b">
+                <div class="flex items-start gap-4">
+                  <div class="bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-lg w-[70px]" style='background-image: url("stability/0d71a626-3a8a-45c1-bc85-f27f77254f81.png");'></div>
+                  <div class="flex flex-1 flex-col">
+                    <p class="text-[#111418] text-base font-medium">Nike Air Max 90</p>
+                    <p class="text-[#637588] text-sm">$160</p>
+                    <p class="text-[#637588] text-sm">Size: 6.5, Color: Black</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-4">
+                  <div class="flex items-center gap-2">
+                    <button class="h-7 w-7 flex items-center justify-center bg-[#f0f2f4] rounded-full">-</button>
+                    <input class="text-center w-8 border-none bg-transparent" type="number" value="1" min="1" />
+                    <button class="h-7 w-7 flex items-center justify-center bg-[#f0f2f4] rounded-full">+</button>
+                  </div>
+                  <button class="h-10 px-4 bg-[#2884e6] text-white font-bold rounded-lg">Purchase</button>
+                </div>
+              </div>
+            
+            <!-- Repeat product item structure for each additional item in the cart -->
+            
+            <div class="flex justify-end py-5">
+              <button class="h-10 px-4 bg-[#f0f2f4] text-[#111418] font-bold rounded-lg">Continue Shopping</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

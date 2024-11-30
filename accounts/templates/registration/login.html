@@ -1,0 +1,65 @@
+{% load static %}
+{% load django_bootstrap5 %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <script src="{% static 'js/tailwindcss.js' %}"></script>
+  <title>Login</title>
+</head>
+
+<body>
+  <header class="d-flex justify-content-between align-items-center border-bottom px-3 py-3 bg-light">
+    <div class="d-flex align-items-center gap-3">
+      <div class="size-4">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#clip0_6_319)">
+            <path d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24L8.57829 8.57829Z" fill="currentColor"></path>
+          </g>
+          <defs>
+            <clipPath id="clip0_6_319">
+              <rect width="48" height="48" fill="white"></rect>
+            </clipPath>
+          </defs>
+        </svg>
+      </div>
+      <h2 class="text-dark font-weight-bold">Shobly</h2>
+    </div>
+
+    <a href="{% url 'accounts:signup' %}" class="btn btn-primary text-white">SignUp</a>
+  </header>
+
+  <div class="container d-flex flex-column align-items-center vh-100">
+    <div class="col-12 col-md-6 col-lg-4 mt-5 p-4 bg-white shadow-sm rounded">
+      {% if form.errors %}
+        <p class="text-danger">Your username and password didn't match. Please try again.</p>
+      {% endif %}
+      
+      {% if next %}
+        {% if user.is_authenticated %}
+          <p>Your account doesn't have access to this page. Please login with an account that has access.</p>
+        {% else %}
+          <p>Please login to see this page.</p>
+        {% endif %}
+      {% endif %}
+      
+      <h4 class="text-center font-weight-bold text-secondary mb-4">Login</h4>
+      
+      <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        
+        <button class="btn btn-outline-primary w-100 mb-3" type="submit">Login</button>
+        
+        <input type="hidden" name="next" value="{{ next }}">
+      </form>
+
+      <p class="text-center">
+        <a href="{% url 'password_reset' %}" class="text-decoration-none">Lost password?</a>
+      </p>
+    </div>
+  </div>
+</body>
+</html>
