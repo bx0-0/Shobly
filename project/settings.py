@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-wdioa&!#^=j5#z8een4_k5)$q+rf72fsj(%8ygobxz5vr0a3e)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -43,12 +43,16 @@ INSTALLED_APPS = [
     'django_bootstrap5',
     "cities_light",
     'products',
+    'django_filters',
+    'cart',
+    'ai_predict',
     
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -68,6 +72,7 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.i18n',
                 'django.contrib.messages.context_processors.messages',
             ],
         },
@@ -119,6 +124,14 @@ USE_I18N = True
 USE_TZ = True
 
 
+LANGUAGES= [
+    ('ar', 'Arabic'),
+    ('en', 'English'),
+]
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
@@ -132,6 +145,7 @@ else:
 
   STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_ROOT = BASE_DIR/"assets"
+
 
 STATICFILES_STORAGE = "django_forgiving_collectstatic.storages.ForgivingManifestStaticFilesStorage"
 

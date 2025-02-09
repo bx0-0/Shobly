@@ -1,0 +1,217 @@
+{% load static %}
+{% load multiply %}
+{% load django_bootstrap5 %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link rel="stylesheet" as="style" onload="this.rel='stylesheet'"
+        href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&family=Work+Sans%3Awght%40400%3B500%3B700%3B900" />
+    <title>{% trans "Shopping Cart" %}</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+    <script src="{% static 'js/tailwindcss.js' %}"></script>
+</head>
+
+<body dir="{% if LANGUAGE_CODE == 'ar' %}rtl{% else %}ltr{% endif %}">
+  <script src="https://www.sandbox.paypal.com/sdk/js?client-id=AUQ19cLvebdXvnGFzDaKqZLkOHR_ZW13KYBInDdFKgoklPSLHliihyp8kL1ygcvjdOOSJuFXIllwvIcu&currency=USD&intent=capture" data-sdk-integration-source="button-factory"></script>
+      <script>
+      let paypalInitialized = false;
+
+      window.onload = function() {
+        paypalInitialized = true;
+        console.log('PayPal SDK loaded');
+      };
+
+        function checkPayPalEmail(productTitle, productPrice, productQuantity, productSlug) {
+          if (!paypalInitialized) {
+            alert("{% trans 'Please wait for PayPal to load, then try again.' %}");
+            return;
+          }
+            const userPayPalEmail = "{{ paypal_email|default:'' }}";
+            if (!userPayPalEmail || userPayPalEmail.trim() === '') {
+                alert('{% trans "You need to add your PayPal email in the settings." %}');
+                window.location.href = '{% url "accounts:edit-profile" %}';
+            } else {
+                openModal(productTitle, productPrice, productQuantity, productSlug);
+            }
+        }
+  
+        function openModal(productTitle, productPrice, productQuantity, productSlug) {
+          if (!paypalInitialized) {
+              alert("{% trans 'Please wait for PayPal to load, then try again.' %}");
+              return;
+          }
+            if (!productPrice) {
+              alert("{% trans 'Invalid product price.' %}");
+              return;
+            }
+            document.getElementById('paypal-modal').classList.remove('hidden');
+            renderPayPalButton(productTitle, productPrice, productQuantity, productSlug);
+        }
+  
+        function closeModal() {
+            document.getElementById('paypal-modal').classList.add('hidden');
+        }
+  
+        function renderPayPalButton(productTitle, productPrice, productQuantity, productSlug) {
+          if (!paypalInitialized) {
+              alert("{% trans 'Please wait for PayPal to load, then try again.' %}");
+              return;
+          }
+            const container = document.getElementById('paypal-button-container');
+            container.innerHTML = '';
+            console.log('productPrice:', productPrice);
+
+             const parsedPrice = parseFloat(productPrice);
+             if (isNaN(parsedPrice) || parsedPrice <= 0) {
+                 alert("{% trans 'Invalid product price. Please check the price.' %}");
+                 console.error("Invalid product price:", productPrice);
+                 return; // Stop if the price is invalid
+             }
+
+            paypal.Buttons({
+                createOrder: function (data, actions) {
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: {
+                                value: parsedPrice,
+                                currency_code: 'USD'
+                            }
+                        }]
+                    });
+                },
+                onApprove: function (data, actions) {
+                    return actions.order.capture().then(function (orderData) {
+                        const transaction = orderData.purchase_units[0].payments.captures[0];
+                        alert(`{% trans 'Transaction' %} ${transaction.status}: ${transaction.id}`);
+                        completeOrder(transaction.id, productSlug, productQuantity, productTitle, parsedPrice);
+                    });
+                },
+                onError: function (err) {
+                    console.error(err);
+                    alert("{% trans 'Error processing the transaction.' %}");
+                }
+            }).render('#paypal-button-container');
+        }
+  
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+  
+        const csrfToken = getCookie('csrftoken');
+  
+        function completeOrder(transactionId, productSlug, productQuantity, productTitle, productPrice) {
+            const url = window.origin + "{% url 'cart:complete_order' %}";
+            console.log(url)
+            console.log(csrfToken)
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify({
+                    transactionId: transactionId,
+                    productSlug: productSlug,
+                    Quantity: productQuantity,
+                    productName: productTitle,
+                    TotalPrice: productPrice
+                })
+            })
+                .then(response => {
+                    if (!response.ok) {
+                      console.error('Network response was not ok:', response);
+                      alert('{% trans "Error completing the order. Please try again." %}');
+                      throw new Error('Network response was not ok');
+                  }
+                  return response.json();
+                })
+                .then(data => {
+                    console.log('Success:', data);
+                    console.log('{% trans "Order completed successfully:" %} ' + JSON.stringify(data));
+                     alert('{% trans "Order completed successfully!" %}');
+                    window.location.href = window.origin + "{% url 'cart:cart' %}";
+                })
+                .catch((error) => {
+                  console.error('Error:', error);
+                  alert('{% trans "An unexpected error occurred. Please try again later." %}');
+
+                });
+        }
+    </script>
+  
+    <div class="relative flex min-h-screen flex-col bg-white group/design-root overflow-x-hidden"
+        style='font-family: "Work Sans", "Noto Sans", sans-serif;'>
+        <div class="layout-container flex h-full grow flex-col">
+            <header
+                class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f0f2f5] px-10 py-3">
+                <div class="flex items-center gap-4 text-[#111518]">
+                  <a href="{% url 'home:index' %}">
+                    <h2 class="text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em]">{% trans "Shobly" %}</h2>
+                  </a>
+                </div>
+            </header>
+            <div class="px-40 flex flex-1 justify-center py-5">
+                <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+                    <h2 class="text-[#111418] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
+                       {% trans "Shopping Cart" %}
+                    </h2>
+                    {% for item in cart %}
+                    <div class="flex gap-4 bg-white px-4 py-3 justify-between border-b">
+                        <div class="flex items-start gap-4">
+                            <div class="bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-lg w-[70px]"
+                                style='background-image: url("{{ item.product.img1.url }}");'></div>
+                            <div class="flex flex-1 flex-col">
+                                <p class="text-[#111418] text-base font-medium">{{ item.product.title }}</p>
+                                <p class="text-[#637588] text-sm">{% trans "Item price:" %} ${{ item.product.price }}</p>
+                                <p class="text-[#637588] text-sm">{% trans "Quantity:" %} {{item.quantity}}</p>
+                                <p class="text-[#637588] text-sm">{% trans "Total:" %} ${{ item.quantity|multiply:item.product.price }}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <form action="{% url 'cart:decrease_quantity' item.product.slug %}" method="post">
+                                {% csrf_token %}
+                                <button class="h-8 w-8 bg-red-500 text-white font-bold rounded-lg">-</button>
+                            </form>
+                            <form action="{% url 'cart:increase_quantity' item.product.slug %}" method="post">
+                                {% csrf_token %}
+                                <button class="h-8 w-8 bg-green-500 text-white font-bold rounded-lg">+</button>
+                            </form>
+                             <button class="h-10 px-4 bg-[#2884e6] text-white font-bold rounded-lg"
+                                onclick="checkPayPalEmail('{{ item.product.title }}', '{{ item.quantity|multiply:item.product.price }}' , '{{item.quantity}}','{{item.product.slug}}')">{% trans "Purchase" %}</button>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div class="flex justify-end py-5">
+                        <a href="{% url 'products:product_list' %}"><button
+                                class="h-10 px-4 bg-[#f0f2f4] text-[#111418] font-bold rounded-lg">{% trans "Continue Shopping" %}</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+  
+        <div id="paypal-modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-50">
+            <div class="bg-white p-5 rounded-lg shadow-lg">
+                <div id="paypal-button-container"></div>
+                <button onclick="closeModal()" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg">{% trans "Close" %}</button>
+            </div>
+        </div>
+    </div>
+</body>
+  
+</html>

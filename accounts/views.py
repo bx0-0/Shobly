@@ -15,33 +15,26 @@ class SignUpView(CreateView):
     success_url = reverse_lazy("login")
     template_name = "registration/signup.html"
     
-    # الدالة دي بتشتغل لما حد يضغط على زرار "تسجيل" عشان يسجل حساب جديد.
-    #  الـ `transaction.atomic` هنا بتأكد إن كل حاجة بتتحفظ في الداتا بيز صح
-    # لو في خطوات كتير أو بيانات جاية من كذا مكان.
     @transaction.atomic
     def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
         return super().post(request, *args, **kwargs)
     
-    # الدالة دي بتشتغل لما البيانات اللي اتكتبت في الفورم صح.
-    # هنا بنعمل بروفايل جديد للمستخدم اللي لسه سجل ونحفظ فيه "المدينة" اللي دخلها.
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         response = super().form_valid(form)
-        if self.object:  # "self.object" هو المستخدم الجديد اللي سجل
+        if self.object:  
            profile = Profile.objects.create(user=self.object)
-           profile.city = form.cleaned_data.get('city')  # حفظ المدينة في البروفايل
-           profile.save()  # حفظ البروفايل في الداتا بيز
+           profile.city = form.cleaned_data.get('city')  
+           profile.save()  
            
         return response
 
 class ShowProfileView(TemplateView):
     template_name = "registration/profile.html"
     
-    # الدالة دي بتجهز البيانات اللي هتتعرض في صفحة البروفايل.
-    # هنا بنجيب البروفايل الخاص بالمستخدم اللي سجل دخول ونعرضه في الصفحة.
     def get_context_data(self, **kwargs:Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        profile = Profile.objects.get(user=self.request.user)  # بنجيب البروفايل للمستخدم الحالي
-        context["profile"] = profile  # نضيف البروفايل للـ context عشان نقدر نعرضه في القالب
+        profile = Profile.objects.get(user=self.request.user) 
+        context["profile"] = profile  
         return context
     
 
@@ -50,22 +43,22 @@ class ProfileUpdateView(UpdateView):
     form_class = ProfileForm
     success_url = '../profile/'
     
-    # الدالة دي بتجيب البروفايل اللي هنعدله، وبتتأكد إنه بتاع المستخدم الحالي.
+    
     def get_object(self, queryset=None):
-        obj = Profile.objects.get(user=self.request.user)  # نجيب البروفايل للمستخدم اللي سجل دخول
+        obj = Profile.objects.get(user=self.request.user)  
         return obj
 
-    # الدالة دي بتجهز البيانات اللي هتظهر في فورم تعديل البروفايل.
-    # هنا بنضيف فورم تاني للبيانات العامة للمستخدم زي الاسم والبريد الإلكتروني جنب بيانات البروفايل.
+    
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['user_form'] = UserForm(instance=self.request.user)  # فورم المستخدم للتفاصيل الأساسية
+        context['user_form'] = UserForm(instance=self.request.user)  
         return context
 
-    # الدالة دي بتشتغل لما الفورم اتملأ بشكل صحيح.
-    # هنا بنراجع على الفورم التاني بتاع بيانات المستخدم العامة، ولو صح بنحفظه.
+    
+    
     def form_valid(self, form):
-        user_form = UserForm(self.request.POST, instance=self.request.user)  # فورم البيانات العامة
+        user_form = UserForm(self.request.POST, instance=self.request.user)  
         if user_form.is_valid():
-            user_form.save()  # نحفظ بيانات المستخدم العامة
-        return super().form_valid(form)  # نحفظ التعديلات على البروفايل ونكمل التحديث
+            user_form.save()  
+        return super().form_valid(form)  

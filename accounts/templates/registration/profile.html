@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <html>
   <head>
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
@@ -8,7 +9,7 @@
       onload="this.rel='stylesheet'"
       href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Work+Sans%3Awght%40400%3B500%3B700%3B900"
     />
-    <title>Shobly</title>
+    <title>{% trans "Shobly" %}</title>
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
     <script src="{% static 'js/tailwindcss.js' %}"></script>
   </head>
@@ -32,32 +33,31 @@
               </defs>
             </svg>
           </div>
-          <h2 class="text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em]">Shobly</h2>
+          <a href="{% url 'home:index' %}"><h2 class="text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em]">{% trans "Shobly" %}</h2></a>
         </div>
         <div class="flex flex-1 justify-end gap-8">
-          <div class="flex items-center gap-9">
-            <a class="text-[#111518] text-sm font-medium leading-normal" href="#">Technology</a>
-            <a class="text-[#111518] text-sm font-medium leading-normal" href="#">Home</a>
-            <a class="text-[#111518] text-sm font-medium leading-normal" href="#">Fashion</a>
-            <a class="text-[#111518] text-sm font-medium leading-normal" href="#">Health</a>
-            <a class="text-[#111518] text-sm font-medium leading-normal" href="#">Sports</a>
-            <a class="text-[#111518] text-sm font-medium leading-normal" href="#">Toys</a>
-          </div>
+          <div class="flex flex-1 justify-end gap-8">
+            <div class="flex items-center gap-9"></div>
+            <a href="{% url 'products:product_list' %}?catigory=1" class="text-[#111518] text-sm font-medium leading-normal"  style="margin: 10px;">{% trans "Electronics" %}</a>
+            <a href="{% url 'products:product_list' %}?catigory=5" class="text-[#111518] text-sm font-medium leading-normal"  style="margin: 10px;">{% trans "Fashion" %}</a>
+            <a href="{% url 'products:product_list' %}?catigory=10" class="text-[#111518] text-sm font-medium leading-normal"  style="margin: 10px;">{% trans "Health" %}</a>
+            <a href="{% url 'products:product_list' %}?catigory=6" class="text-[#111518] text-sm font-medium leading-normal"  style="margin: 10px;">{% trans "Sports" %}</a>
+            <a href="{% url 'products:product_list' %}?catigory=9" class="text-[#111518] text-sm font-medium leading-normal " style="margin: 10px;">{% trans "Toys" %}</a>
+            </div>
           <div class="flex gap-2">
 
             {% if request.user.is_authenticated %}
             <button
               class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#2094f3] text-white text-sm font-bold leading-normal tracking-[0.015em]">
-              <span class="truncate">Sell</span>
+              <span class="truncate">{% trans "Sell" %}</span>
             </button>
 
             <span
-              class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f0f2f5] text-[#111518] text-sm font-bold leading-normal tracking-[0.015em] truncate capitalize ml-2">welcome
-              {{request.user.username}}</span>
+              class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f0f2f5] text-[#111518] text-sm font-bold leading-normal tracking-[0.015em] truncate capitalize ml-2">{% trans "welcome" %} {{request.user.username}}</span>
             {% else %}
             <button
               class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#2094f3] text-white text-sm font-bold leading-normal tracking-[0.015em]">
-              <span class="truncate">Sign up</span>
+              <span class="truncate">{% trans "Sign up" %}</span>
             </button>
 
             {% endif %}
@@ -65,11 +65,11 @@
           </div>
         </div>
       </header>
-        <div class="px-40 flex flex-1 justify-center py-5">
+        <div class="px-40 flex flex-1 justify-center py-5" dir="{% if LANGUAGE_CODE == 'ar' %}rtl{% else %}ltr{% endif %}">
           <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
             <div class="@container">
               <div class="@[480px]:px-4 @[480px]:py-3">
-                <div class="w-full bg-center bg-no-repeat bg-cover flex flex-col justify-end overflow-hidden bg-white @[480px]:rounded-xl min-h-80" style='background-image: url("https://cdn.usegalileo.ai/stability/9f3b6ad4-b399-4c5c-ac9c-d06afb57fb37.png");'></div>
+                <div class="w-full bg-center bg-no-repeat bg-cover flex flex-col justify-end overflow-hidden bg-white @[480px]:rounded-xl min-h-80" style='background-image: url({% static "img/image.png" %});'></div>
               </div>
             </div>
             <div class="flex p-4 @container">
@@ -89,12 +89,12 @@
                 </div>
               </div>
             </div>
-            <h3 class="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">About</h3>
+            <h3 class="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">{% trans "About" %}</h3>
             <p class="text-[#111418] text-base font-normal leading-normal pb-3 pt-1 px-4">
               {% if profile.about %}
               {{profile.about}}
               {% else %}
-              no  about found add some by edit your profile bottom
+              {% trans "no about found add some by edit your profile bottom" %}
               {% endif %}
 
             </p>
@@ -106,9 +106,9 @@
               </div>
               <p class="text-[#111418] text-base font-normal leading-normal">
                 {% if profile.user.profile %}
-                  {{ profile.city }}
+                  {% trans profile.city.name %}
                 {% else %}
-                  No city selected
+                  {% trans "No city selected" %}
                 {% endif %}
               </p>
               </div>
@@ -118,7 +118,7 @@
                   <path d="M216,64H192V40a8,8,0,0,0-8-8H72a8,8,0,0,0-8,8V64H40a16,16,0,0,0-16,16V224a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V80A16,16,0,0,0,216,64ZM176,40v24H80V40h96Zm24,208H56V80H216v168Z"></path>
                 </svg>
               </div>
-              <p class="text-[#111418] text-base font-normal leading-normal">email: {{request.user.email}}</p>
+              <p class="text-[#111418] text-base font-normal leading-normal">{% trans "email" %}: {{request.user.email}}</p>
             </div>
             <div class="flex items-center gap-4 bg-white px-4 min-h-[72px] py-2">
               <div class="text-[#111418] flex items-center justify-center rounded-lg bg-[#f0f2f4] shrink-0 size-12" data-icon="User" data-size="24px" data-weight="regular">
@@ -126,20 +126,30 @@
                   <path d="M128,128a64,64,0,1,0-64-64A64,64,0,0,0,128,128Zm0,16c-32.8,0-61.92,10.1-82.56,27.44A16,16,0,0,0,48,192v16a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V192a16,16,0,0,0-16-16.56C189.92,154.1,160.8,144,128,144Z"></path>
                 </svg>
               </div>
-              <p class="text-[#111418] text-base font-normal leading-normal">company name:{{profile.company_name}} </p>
+              <p class="text-[#111418] text-base font-normal leading-normal">{% trans "company name" %}:{{profile.company_name}} </p>
             </div>
             <div class="flex justify-between items-center px-4 py-2 bg-white">
               <a href="{% url 'accounts:edit-profile' %}" class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#2884e6] text-white text-sm font-bold leading-normal tracking-[0.015em]">
-                <span class="truncate">edit</span>
+                <span class="truncate">{% trans "edit" %}</span>
               </a>
+                <a href="{% url 'products:user_products' %}" class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#2884e6] text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-red-500">
+                <span class="truncate">{% trans "My Products" %}</span>
+                </a>
+            <form action="{% url 'logout' %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#2884e6] text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-red-500">
+                <span class="truncate">{% trans "logout" %}</span>
+              </button>
+            </form>
+
             </div>
           </div>
         </div>
         <footer class="px-10 py-3 border-t border-solid border-b-[#f0f2f4] bg-[#f0f2f4]">
           <div class="flex justify-center items-center gap-4">
-            <a href="#" class="text-[#111418] text-sm font-medium leading-normal">Privacy Policy</a>
+            <a href="#" class="text-[#111418] text-sm font-medium leading-normal">{% trans "Privacy Policy" %}</a>
             <span class="text-[#111418]">|</span>
-            <a href="#" class="text-[#111418] text-sm font-medium leading-normal">Terms of Service</a>
+            <a href="#" class="text-[#111418] text-sm font-medium leading-normal">{% trans "Terms of Service" %}</a>
           </div>
         </footer>
       </div>

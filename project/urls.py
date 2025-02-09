@@ -20,15 +20,22 @@ from django.views.static import serve
 from django.conf import settings
 from django.urls import re_path
 from django.conf.urls.static import static
+from django.conf.urls.i18n import i18n_patterns
 
 
 urlpatterns = [
+    path('i18n/', include('django.conf.urls.i18n')),
+    path('admin/', admin.site.urls),  
+]
+
+urlpatterns += i18n_patterns(
     path('accounts/', include('django.contrib.auth.urls')),
-    path('accounts/',include('accounts.urls',namespace='accounts')),
-    path('admin/', admin.site.urls),
+    path('accounts/', include('accounts.urls', namespace='accounts')),
     path('', include('home.urls', namespace='home')),
     path('products/', include('products.urls', namespace='products')),
-]
+    path('cart/', include('cart.urls', namespace='cart')),
+    path('ai-predict/', include('ai_predict.urls', namespace='ai_predict')),
+)
 
 
 if not settings.DEBUG:

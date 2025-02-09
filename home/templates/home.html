@@ -1,10 +1,13 @@
 {% load static %}
+{% load i18n %}
 <html>
+
 <head>
   <link rel="stylesheet" as="style" onload="this.rel='stylesheet'"
     href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Work+Sans%3Awght%40400%3B500%3B700%3B900" />
 
-  <title>Shobly</title>
+  <title>{% trans "Shobly" %}</title>
+  <link rel="stylesheet" href="{% static 'css/stayl.css' %}">
   <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
 
   <script src="{% static 'js/tailwindcss.js' %}"></script>
@@ -14,8 +17,8 @@
   <div class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden"
     style='font-family: "Work Sans", "Noto Sans", sans-serif;'>
     <div class="layout-container flex h-full grow flex-col">
-      <header
-        class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f0f2f5] px-10 py-3">
+      
+      <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f0f2f5] px-10 py-3">
         <div class="flex items-center gap-4 text-[#111518]">
           <div class="size-4">
             <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -31,124 +34,167 @@
               </defs>
             </svg>
           </div>
-          <h2 class="text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em]">Shobly</h2>
+          
+          <a href="{% url 'home:index' %}">
+            <h2 class="text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em]">{% trans "Shobly" %}</h2>
+          </a>
         </div>
         <div class="flex flex-1 justify-end gap-8">
-          <div class="flex items-center gap-9">
-            <a class="text-[#111518] text-sm font-medium leading-normal" href="#">Technology</a>
-            <a class="text-[#111518] text-sm font-medium leading-normal" href="#">Home</a>
-            <a class="text-[#111518] text-sm font-medium leading-normal" href="#">Fashion</a>
-            <a class="text-[#111518] text-sm font-medium leading-normal" href="#">Health</a>
-            <a class="text-[#111518] text-sm font-medium leading-normal" href="#">Sports</a>
-            <a class="text-[#111518] text-sm font-medium leading-normal" href="#">Toys</a>
-          </div>
-          <div class="flex gap-2">
+          <div class="flex items-center gap-9"></div>
+          <a href="{% url 'products:product_list' %}?catigory=1"
+            class="text-[#111518] text-sm font-medium leading-normal" style="margin: 10px;">{% trans "Electronics" %}</a>
+          <a href="{% url 'products:product_list' %}?catigory=5"
+            class="text-[#111518] text-sm font-medium leading-normal" style="margin: 10px;">{% trans "Fashion" %}</a>
+          <a href="{% url 'products:product_list' %}?catigory=10"
+            class="text-[#111518] text-sm font-medium leading-normal" style="margin: 10px;">{% trans "Health" %}</a>
+          <a href="{% url 'products:product_list' %}?catigory=6"
+            class="text-[#111518] text-sm font-medium leading-normal" style="margin: 10px;">{% trans "Sports" %}</a>
+          <a href="{% url 'products:product_list' %}?catigory=9"
+            class="text-[#111518] text-sm font-medium leading-normal " style="margin: 10px;">{% trans "Toys" %}</a>
+        </div>
+        <div class="flex gap-2">
 
-            {% if request.user.is_authenticated %}
-            <button
-              class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#2094f3] text-white text-sm font-bold leading-normal tracking-[0.015em]">
-              <span class="truncate">Sell</span>
-            </button>
+          {% if request.user.is_authenticated %}
+          <button
+            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#2094f3] text-white text-sm font-bold leading-normal tracking-[0.015em]">
+            <a href="{% url 'products:product_list' %}"><span class="truncate">{% trans "Sell" %}</span></a>
+          </button>
 
-            <span
-              class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f0f2f5] text-[#111518] text-sm font-bold leading-normal tracking-[0.015em] truncate capitalize ml-2">welcome
-              {{request.user.username}}</span>
-            {% else %}
-            <a
-              href="{% url 'accounts:signup' %}" class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#2094f3] text-white text-sm font-bold leading-normal tracking-[0.015em]">
-              <span class="truncate">Sign up</span>
+          <span
+            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f0f2f5] text-[#111518] text-sm font-bold leading-normal tracking-[0.015em] truncate capitalize ml-2"><a
+              href="{% url 'accounts:profile' %}">{% trans "welcome" %}
+              {{request.user.username}}</a></span>
+          {% else %}
+          <a href="{% url 'accounts:signup' %}"
+            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#2094f3] text-white text-sm font-bold leading-normal tracking-[0.015em]">
+            <span class="truncate">{% trans "Sign up" %}</span>
           </a>
 
-            {% endif %}
-
+          {% endif %}
+          <!-- زر الترجمة -->
+          <div class="relative ml-4 translate-y-[9px]">
+            <button id="language-button" class="flex items-center text-gray-500 hover:text-blue-500 focus:outline-none">
+              <span>{% trans "Language" %}</span>
+              <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div id="language-menu" class="absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg hidden">
+              <a href="/en/" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">{% trans "English" %}</a>
+              <a href="/ar/" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">{% trans "Arabic" %}</a>
+            </div>
           </div>
+
+          <script>
+            document.getElementById('language-button').addEventListener('click', function () {
+              var menu = document.getElementById('language-menu');
+              menu.classList.toggle('hidden');
+            });
+          </script>
+
         </div>
       </header>
-      <div class="px-40 flex flex-1 justify-center py-5">
-        <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
-          <div class="@container">
-            <div class="@[480px]:p-4">
-              <div
-                class="flex min-h-[600px] flex-col gap-9 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[490px]:rounded-xl items-start justify-end px-6 pb-10 @[480px]:px-10"
-                style='background-image: linear-gradient(rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 100%), url("{% static 'img/3.png' %}");'>
-                <div class="flex flex-col gap-2 text-left">
-                  <h1
-                    class="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]">
-                    Buy and sell with peace of mind
-                  </h1>
-                  <h2
-                    class="text-white text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal">
-                    From secure payments to our 24/7 customer service, we've got you covered. And if you're selling,
-                    we've got your back with Seller Protection, too.
-                  </h2>
-                </div>
-                <div class="flex-wrap gap-3 flex">
-                  <button
-                    class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#2094f3] text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em]">
-                    <span class="truncate">Shop now</span>
-                  </button>
-                  <button
-                    class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#f0f2f5] text-[#111518] text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em]">
-                    <span class="truncate">Start selling</span>
-                  </button>
-                </div>
+    </div>
+  
+    <div class="px-40 flex flex-1 justify-center py-5" dir="{% if LANGUAGE_CODE == 'ar' %}rtl{% else %}ltr{% endif %}">
+      <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+        <div class="@container">
+          <div class="@[480px]:p-4">
+            <div
+              class="flex min-h-[600px] flex-col gap-9 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[490px]:rounded-xl items-start justify-end px-6 pb-10 @[480px]:px-10"
+              style='background-image: linear-gradient(rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 100%), url("{% static 'img/3.png' %}");'>
+              <div class="flex flex-col gap-2 text-left">
+                <h1
+                  class="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]">
+                  {% trans "Buy and sell with peace of mind" %}
+                </h1>
+                <h2
+                  class="text-white text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal">
+                  {% trans "From secure payments to our 24/7 customer service, we've got you covered. And if you're selling, we've got your back with Seller Protection, too." %}
+                </h2>
               </div>
-            </div>
-          </div>
-          <div class="flex flex-col gap-10 px-4 py-10 @container">
-            <h1
-              class="text-[#111518] tracking-light text-[32px] font-bold leading-tight @[480px]:text-4xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] max-w-[720px]">
-              Why buy on Shobly?
-            </h1>
-            <h3 class="text-[#111518] text-lg  leading-tight tracking-[-0.015em]">From secure payments to our 24/7
-              customer service, we've got you covered. And if you're selling, we've got your back with Seller
-              Protection, too.</h3>
-          </div>
-          <div class="@container">
-            <div class="flex flex-col gap-6 px-4 py-10 @[480px]:gap-8 @[864px]:flex-row">
-              <div
-                class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl @[480px]:h-auto @[480px]:min-w-[400px] @[864px]:w-full"
-                style= 'background-image: url("{%static 'img/6f3970b0-5d7e-4732-bc39-52178997ac04.png'%}");'></div>
-              <div class="flex flex-col gap-6 @[480px]:min-w-[400px] @[480px]:gap-8 @[864px]:justify-center">
-                <div class="flex flex-col gap-2 text-left">
-                  <h1
-                    class="text-[#111518] text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]">
-                    Easy selling, no hassles
-                  </h1>
-                  <h2
-                    class="text-[#111518] text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal">
-                    Join millions of sellers and list your items for free in minutes. Plus, enjoy low fees and get paid
-                    instantly with our secure payment system.
-                  </h2>
-                </div>
+              <div class="flex-wrap gap-3 flex">
                 <button
                   class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#2094f3] text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em]">
-                  <span class="truncate">Start selling</span>
+                  <a href="{% url 'products:create_product' %}"><span class="truncate">{% trans "Create Product Now" %}</span></a>
                 </button>
+                <a href="{% url 'products:product_list' %}">
+                  <button
+                    class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#f0f2f5] text-[#111518] text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em]">
+                    <span class="truncate">{% trans "Start selling" %}</span>
+                  </button>
+                </a>
               </div>
             </div>
           </div>
-          <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
-            <div class="flex flex-col gap-3">
-              <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-                style='background-image: url("{% static 'img/886672bc-85f0-43fb-9c4e-d9663d6a7317.png' %}");'></div>
+        </div>
+        <div class="flex flex-col gap-10 px-4 py-10 @container">
+          <h1
+            class="text-[#111518] tracking-light text-[32px] font-bold leading-tight @[480px]:text-4xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] max-w-[720px]">
+            {% trans "Why buy on Shobly?" %}
+          </h1>
+          <h3 class="text-[#111518] text-lg  leading-tight tracking-[-0.015em]">{% trans "From secure payments to our 24/7 customer service, we've got you covered. And if you're selling, we've got your back with Seller Protection, too." %}</h3>
+          <a href="{% url 'home:about_as' %}">
+            <button
+            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-gradient-to-r from-blue-500 to-green-500 text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <span class="truncate">{% trans "About us" %}</span>
+            </button>
+          </a>
+        </div>
+        <div class="@container">
+          <div class="flex flex-col gap-6 px-4 py-10 @[480px]:gap-8 @[864px]:flex-row">
+            <div
+              class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl @[480px]:h-auto @[480px]:min-w-[400px] @[864px]:w-full" style='background-image: url("{% static 'img/6f3970b0-5d7e-4732-bc39-52178997ac04.png' %}");'></div>
+            <div class="flex flex-col gap-6 @[480px]:min-w-[400px] @[480px]:gap-8 @[864px]:justify-center">
+              <div class="flex flex-col gap-2 text-left">
+                <h1
+                  class="text-[#111518] text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]">
+                  {% trans "Easy selling, no hassles" %}
+                </h1>
+                <h2
+                  class="text-[#111518] text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal">
+                  {% trans "Join millions of sellers and list your items for free in minutes. Plus, enjoy low fees and get paid instantly with our secure payment system." %}
+                </h2>
+              </div>
+              <a href="{% url 'products:product_list' %}">
+
+                <button
+                  class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#2094f3] text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em]">
+                  <span class="truncate">{% trans "Start selling" %}</span>
+                </button>
+              </a>
+              <a href=" {% url 'ai_predict:predict' %}" class="text-[#2094f3] text-sm font-normal leading-normal tracking-[0.015em]">
+                <button
+                  class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-gradient-to-r from-blue-500 to-green-500 text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] shadow-lg hover:shadow-xl transition-shadow duration-300">
+                  <span class="truncate">{% trans "Predict your perfect product using AI" %}</span>
+                </button>
+              </a>
             </div>
-            <div class="flex flex-col gap-3">
-              <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-                style='background-image: url("{% static 'img/750ee82f-bf37-4c40-afd2-0ca370b4397e.png' %}");'></div>
-            </div>
-            <div class="flex flex-col gap-3">
-              <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-                style='background-image: url("{% static 'img/c58f3193-7f97-49f6-b72a-37ae3f45fa31.png' %}");'></div>
-            </div>
-            <div class="flex flex-col gap-3">
-              <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-                style='background-image: url("{% static 'img/image2.png' %}");'></div>
-            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
+          <div class="flex flex-col gap-3">
+            <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
+              style='background-image: url("{% static 'img/886672bc-85f0-43fb-9c4e-d9663d6a7317.png' %}");'></div>
+          </div>
+          <div class="flex flex-col gap-3">
+            <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
+              style='background-image: url("{% static 'img/750ee82f-bf37-4c40-afd2-0ca370b4397e.png' %}");'></div>
+          </div>
+          <div class="flex flex-col gap-3">
+            <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
+              style='background-image: url("{% static 'img/c58f3193-7f97-49f6-b72a-37ae3f45fa31.png' %}");'></div>
+          </div>
+          <div class="flex flex-col gap-3">
+            <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
+              style='background-image: url("{% static 'img/image2.png' %}");'></div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  </div>
 </body>
+
 </html>

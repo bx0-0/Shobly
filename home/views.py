@@ -1,11 +1,13 @@
 from django.shortcuts import render
+from .models import Team
 
-# Create your views here.
 
 def index(request):
-    """
-    هذه الدالة تستقبل طلب من المستخدم (request) وترسل له صفحة HTML اسمها index.html.
-
-    ببساطة: لما حد يفتح الموقع، هذه الدالة بتعرض له الصفحة الرئيسية.
-    """
+    
     return render(request, 'home.html')
+
+def about_as(request):
+    
+    team = Team.objects.all()
+    
+    return render(request, 'about_as.html', {'team': team})

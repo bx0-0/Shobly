@@ -1,0 +1,13 @@
+/* stayl.css */
+
+body.rtl {
+    direction: rtl;
+}
+
+body.rtl .text-align-left {
+    text-align: right;
+}
+
+body.rtl .text-align-right {
+    text-align: left;
+}

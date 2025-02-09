@@ -1,0 +1,178 @@
+{% load static %}
+{% load django_bootstrap5 %}
+{% load i18n %}
+<html>
+
+<head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link rel="stylesheet" as="style" onload="this.rel='stylesheet'"
+        href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" />
+
+    <title>{% trans "Shobly" %}</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+    <script src="{% static 'js/tailwindcss.js' %}"></script>
+</head>
+
+<body>
+    <div class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden"
+        style='font-family: "Work Sans", "Noto Sans", sans-serif;'>
+        <div class="layout-container flex h-full grow flex-col">
+            <header
+                class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f0f2f5] px-10 py-3">
+                <div class="flex items-center gap-4 text-[#111518]">
+                    <div class="size-4">
+                        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_6_319)">
+                                <path
+                                    d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24L8.57829 8.57829Z"
+                                    fill="currentColor"></path>
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_6_319">
+                                    <rect width="48" height="48" fill="white"></rect>
+                                </clipPath>
+                            </defs>
+                        </svg>
+                    </div>
+                    <a href="{% url 'home:index' %}"><h2 class="text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em]">{% trans "Shobly" %}</h2></a>
+                </div>
+                <div class="flex flex-1 justify-end gap-8">
+                    <form method="GET" action="{% url 'products:product_list' %}" class="flex items-center gap-2">
+                        <input type="text" name="title" placeholder="{% trans 'Search products' %}"
+                            class=" form-control is-valid flex-1 px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            id="id_title" />
+                        <button type="submit"
+                            class="flex items-center justify-center px-4 py-2 bg-blue-500 text-white rounded-xl hover:bg-blue-600 transition duration-300">
+                            {% trans "Search" %}
+                        </button>
+                    </form>
+                    <a href="{% url 'cart:cart' %}">
+                    <button
+                        class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 bg-[#f0f2f5] text-[#111518] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5">
+                        <div class="text-[#111518]" data-icon="ShoppingCart" data-size="20px" data-weight="regular">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor"
+                                viewBox="0 0 256 256">
+                                <path
+                                    d="M222.14,58.87A8,8,0,0,0,216,56H54.68L49.79,29.14A16,16,0,0,0,34.05,16H16a8,8,0,0,0,0,16h18L59.56,172.29a24,24,0,0,0,5.33,11.27,28,28,0,1,0,44.4,8.44h45.42A27.75,27.75,0,0,0,152,204a28,28,0,1,0,28-28H83.17a8,8,0,0,1-7.87-6.57L72.13,152h116a24,24,0,0,0,23.61-19.71l12.16-66.86A8,8,0,0,0,222.14,58.87ZM96,204a12,12,0,1,1-12-12A12,12,0,0,1,96,204Zm96,0a12,12,0,1,1-12-12A12,12,0,0,1,192,204Zm4-74.57A8,8,0,0,1,188.1,136H69.22L57.59,72H206.41Z">
+                                </path>
+                            </svg>
+                        </div>
+                    </button>
+                    </a>
+                </div>
+                                    <!-- زر الترجمة -->
+                                    <div class="relative ml-4 translate-y-[-10px]">
+                                        <button id="language-button" class="flex items-center text-gray-500 hover:text-blue-500 focus:outline-none">
+                                            <span>{% trans "Language" %}</span>
+                                            <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                            </svg>
+                                        </button>
+                                        <div id="language-menu" class="absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg hidden">
+                                            <a href="/en{{ request.path|slice:'3:' }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">{% trans "English" %}</a>
+                                            <a href="/ar{{ request.path|slice:'3:' }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">{% trans "Arabic" %}</a>
+                                        </div>
+                                    </div>
+                                    <script>
+                                        document.getElementById('language-button').addEventListener('click', function () {
+                                            var menu = document.getElementById('language-menu');
+                                            menu.classList.toggle('hidden');
+                                        });
+                                    </script>
+            </header>
+            <div class="px-40 flex flex-1 justify-center py-5" dir="{% if LANGUAGE_CODE == 'ar' %}rtl{% else %}ltr{% endif %}">
+                <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+                    <div class="flex flex-wrap gap-2 p-4">
+                        <a class="text-[#60778a] text-base font-medium leading-normal" href="#">{% trans "Home" %}</a>
+                        <span class="text-[#60778a] text-base font-medium leading-normal">/</span>
+                        <span class="text-[#111518] text-base font-medium leading-normal" id="x">{% trans "Prediction Products" %}</span>
+                    </div>
+                    <div class="flex flex-wrap justify-between gap-3 p-4">
+                        <p class="text-[#111518] tracking-light text-[32px] font-bold leading-tight min-w-72">{% trans "Products" %}</p>
+                    </div>
+                    <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
+                        {% for product in recommendations %}
+                        <div class="flex flex-col gap-4 pb-6">
+                            <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl"
+                                style='background-image: url("{{ product.img1.url }}"); height: 200px;'></div>
+                            <div class="flex flex-col gap-2">
+                                <p class="text-[#111518] text-base font-medium leading-normal truncate">{% trans "name" %}: {{ product.title }}</p>
+                                <p class="text-[#60778a] text-sm font-normal leading-normal">{% trans "price" %}: {{ product.price }} $</p>
+                                <p class="text-[#60778a] text-sm font-normal leading-normal">{% trans "amount" %}: {{ product.amount }} </p>
+                                <p class="text-[#60778a] text-sm font-normal leading-normal truncate">{% trans "category" %}: {{ product.catigory }}
+                                </p>
+                                <a href="{% url 'products:product_detail' product.slug %}"
+                                    class="flex items-center justify-center px-4 py-2 bg-blue-500 text-white rounded-xl hover:bg-blue-600 transition duration-300">{% trans "View Details" %}</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="flex items-center justify-center p-4">
+                        <a href="#" class="flex size-10 items-center justify-center">
+                            <div class="text-[#111518]" data-icon="CaretLeft" data-size="18px" data-weight="regular">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" fill="currentColor"
+                                    viewBox="0 0 256 256"></svg>
+                                <path
+                                    d="M165.66,202.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L91.31,128Z">
+                                </path>
+                                </svg>
+                            </div>
+                        </a>
+                        <div class="flex items-center justify-center p-4">
+                            {% if recommendations.has_other_pages %}
+                            <div class="pagination_wrap">
+                                <ul class="flex gap-2">
+                                    {% if recommendations.has_previous %}
+                                    <li>
+                                        <a href="?page={{ recommendations.previous_page_number }}"
+                                            class="flex items-center justify-center p-2 bg-[#f0f2f5] rounded-xl">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" fill="currentColor"
+                                                viewBox="0 0 256 256">
+                                                <path
+                                                    d="M165.66,202.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L91.31,128Z">
+                                                </path>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    {% endif %}
+
+                                    {% for i in recommendations.paginator.page_range %}
+                                    <li>
+                                        <a href="?page={{ i }}"
+                                            class="flex items-center justify-center p-2 bg-[#f0f2f5] rounded-xl {% if recommendations.number == i %}font-bold{% endif %}">
+                                            {{ i }}
+                                        </a>
+                                    </li>
+                                    {% endfor %}
+
+                                    {% if recommendations.has_next %}
+                                    <li>
+                                        <a href="?page={{ recommendations.next_page_number }}"
+                                            class="flex items-center justify-center p-2 bg-[#f0f2f5] rounded-xl">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" fill="currentColor"
+                                                viewBox="0 0 256 256"></svg>
+                                            <path
+                                                d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z">
+                                            </path>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                            {% endif %}
+                        </div>
+
+
+                    </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>

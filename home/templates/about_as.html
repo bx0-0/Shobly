@@ -1,0 +1,216 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% trans "About Us" %}</title>
+    <script src="{% static 'js/tailwindcss.js' %}"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .carousel-item {
+            display: none;
+            transition: all 0.7s ease-in-out;
+            transform-origin: center;
+        }
+
+        .carousel-item.active {
+            display: block;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .carousel-item.hidden {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+
+        .carousel-container {
+            position: relative;
+        }
+
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 50%;
+            padding: 0.75rem;
+            cursor: pointer;
+            color: white;
+            transition: background 0.3s;
+            z-index: 10;
+        }
+
+        .carousel-button:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .carousel-button.left {
+            left: -2rem;
+        }
+
+        .carousel-button.right {
+            right: -2rem;
+        }
+
+        .card:hover {
+            box-shadow: 0 15px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .text-shadow-md {
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-b from-blue-100 to-blue-200 text-gray-800">
+    <!-- Header -->
+    <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f0f2f5] px-10 py-3">
+        <div class="flex items-center gap-4 text-[#111518]">
+          <div class="size-4">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_6_319)">
+                <path
+                  d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24L8.57829 8.57829Z"
+                  fill="currentColor"></path>
+              </g>
+              <defs>
+                <clipPath id="clip0_6_319">
+                  <rect width="48" height="48" fill="white"></rect>
+                </clipPath>
+              </defs>
+            </svg>
+          </div>
+          
+          <a href="{% url 'home:index' %}">
+            <h2 class="text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em]">{% trans "Shobly" %}</h2>
+          </a>
+        </div>
+        <div class="flex gap-2">
+
+          {% if request.user.is_authenticated %}
+          <button
+            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#2094f3] text-white text-sm font-bold leading-normal tracking-[0.015em]">
+            <a href="{% url 'products:product_list' %}"><span class="truncate">{% trans "Sell" %}</span></a>
+          </button>
+
+          <span
+            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f0f2f5] text-[#111518] text-sm font-bold leading-normal tracking-[0.015em] truncate capitalize ml-2"><a
+              href="{% url 'accounts:profile' %}">{% trans "welcome" %}
+              {{request.user.username}}</a></span>
+          {% else %}
+          <a href="{% url 'accounts:signup' %}"
+            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#2094f3] text-white text-sm font-bold leading-normal tracking-[0.015em]">
+            <span class="truncate">{% trans "Sign up" %}</span>
+          </a>
+
+          {% endif %}
+          <!-- زر الترجمة -->
+          <div class="relative ml-4 translate-y-[9px]">
+            <button id="language-button" class="flex items-center text-gray-500 hover:text-blue-500 focus:outline-none">
+              <span>{% trans "Language" %}</span>
+              <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div id="language-menu" class="absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg hidden">
+              <a href="/en{{ request.path|slice:'3:' }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">{% trans "English" %}</a>
+              <a href="/ar{{ request.path|slice:'3:' }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">{% trans "Arabic" %}</a>
+            </div>
+          </div>
+
+          <script>
+            document.getElementById('language-button').addEventListener('click', function () {
+              var menu = document.getElementById('language-menu');
+              menu.classList.toggle('hidden');
+            });
+          </script>
+
+        </div>
+      </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto py-16 px-6" dir="{% if LANGUAGE_CODE == 'ar' %}rtl{% else %}ltr{% endif %}">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Project Overview -->
+            <div class="bg-white shadow-md rounded-lg p-6 hover:shadow-2xl transform hover:scale-105 transition card">
+                <h2 class="text-2xl font-bold text-purple-600 mb-3">{% trans "Project Overview" %}</h2>
+                <p class="text-gray-700">
+                    {% trans "Our project is an innovative e-commerce platform that allows users to securely buy, sell, and list products. Developed by a dedicated team of students, it ensures a seamless trading experience." %}
+                </p>
+            </div>
+
+            <!-- Technology Used -->
+            <div class="bg-white shadow-md rounded-lg p-6 hover:shadow-2xl transform hover:scale-105 transition card">
+                <h2 class="text-2xl font-bold text-purple-600 mb-3">{% trans "Technology Used" %}</h2>
+                <ul class="list-disc pl-5 text-gray-700">
+                    <li><strong>{% trans "Frontend:" %}</strong> HTML, CSS, JavaScript, TailwindCSS</li>
+                    <li><strong>{% trans "Backend:" %}</strong> Python, Django Framework</li>
+                    <li><strong>{% trans "AI:" %}</strong> TF-IDF and Cosine Similarity for recommendations</li>
+                </ul>
+            </div>
+
+            <!-- Features -->
+            <div class="bg-white shadow-md rounded-lg p-6 hover:shadow-2xl transform hover:scale-105 transition card">
+                <h2 class="text-2xl font-bold text-purple-600 mb-3">{% trans "Features" %}</h2>
+                <ul class="list-disc pl-5 text-gray-700">
+                    <li>{% trans "AI-powered product recommendations" %}</li>
+                    <li>{% trans "Secure and fast transactions" %}</li>
+                    <li>{% trans "User-friendly responsive design" %}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Team Members Carousel -->
+
+        <!-- Team Members Carousel -->
+        <section class="mt-16">
+            <h2 class="text-4xl font-extrabold text-center text-purple-600 mb-12">Meet Our Team</h2>
+            <div class="carousel-container mx-auto w-[320px] relative">
+                <div class="carousel-button left" onclick="showPrevSlide()">&#8249;</div>
+                <div class="carousel-button right" onclick="showNextSlide()">&#8250;</div>
+                
+                {% for member in team %}
+                <div class="carousel-item {% if forloop.first %}active{% else %}hidden{% endif %} bg-white shadow-lg rounded-lg p-8 text-center">
+                    <img src="{{ member.image.url }}" alt="{{ member.name }}" class="rounded-full mx-auto mb-4 shadow-md w-32 h-32 object-cover">
+                    <h3 class="text-xl font-bold text-gray-800">{{ member.name }}</h3>
+                    <p class="text-gray-600">{{ member.role }}</p>
+                </div>
+                {% endfor %}
+                
+                
+
+            </div>
+        </section>
+    </main>
+
+    <!-- JavaScript for Carousel -->
+    <script>
+        const carouselItems = document.querySelectorAll('.carousel-item');
+        let currentIndex = 0;
+
+        function showNextSlide() {
+            carouselItems[currentIndex].classList.remove('active');
+            carouselItems[currentIndex].classList.add('hidden');
+            currentIndex = (currentIndex + 1) % carouselItems.length;
+            carouselItems[currentIndex].classList.remove('hidden');
+            carouselItems[currentIndex].classList.add('active');
+        }
+
+        function showPrevSlide() {
+            carouselItems[currentIndex].classList.remove('active');
+            carouselItems[currentIndex].classList.add('hidden');
+            currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
+            carouselItems[currentIndex].classList.remove('hidden');
+            carouselItems[currentIndex].classList.add('active');
+        }
+
+        setInterval(showNextSlide, 4000);
+    </script>
+</body>
+</html>

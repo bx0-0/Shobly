@@ -1,5 +1,6 @@
 {% load static %}
 {% load django_bootstrap5 %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
   <script src="{% static 'js/tailwindcss.js' %}"></script>
-  <title>Login</title>
+  <title>{% trans "Login" %}</title>
 </head>
 
 <body>
@@ -25,39 +26,39 @@
           </defs>
         </svg>
       </div>
-      <h2 class="text-dark font-weight-bold">Shobly</h2>
+      <h2 class="text-dark font-weight-bold">{% trans "Shobly" %}</h2>
     </div>
 
-    <a href="{% url 'accounts:signup' %}" class="btn btn-primary text-white">SignUp</a>
+    <a href="{% url 'accounts:signup' %}" class="btn btn-primary text-white">{% trans "SignUp" %}</a>
   </header>
 
   <div class="container d-flex flex-column align-items-center vh-100">
     <div class="col-12 col-md-6 col-lg-4 mt-5 p-4 bg-white shadow-sm rounded">
       {% if form.errors %}
-        <p class="text-danger">Your username and password didn't match. Please try again.</p>
+        <p class="text-danger">{% trans "Your username and password didn't match. Please try again." %}</p>
       {% endif %}
       
       {% if next %}
         {% if user.is_authenticated %}
-          <p>Your account doesn't have access to this page. Please login with an account that has access.</p>
+          <p>{% trans "Your account doesn't have access to this page. Please login with an account that has access." %}</p>
         {% else %}
-          <p>Please login to see this page.</p>
+          <p>{% trans "Please login to see this page." %}</p>
         {% endif %}
       {% endif %}
       
-      <h4 class="text-center font-weight-bold text-secondary mb-4">Login</h4>
+      <h4 class="text-center font-weight-bold text-secondary mb-4">{% trans "Login" %}</h4>
       
       <form method="post" action="{% url 'login' %}">
         {% csrf_token %}
         {% bootstrap_form form %}
         
-        <button class="btn btn-outline-primary w-100 mb-3" type="submit">Login</button>
+        <button class="btn btn-outline-primary w-100 mb-3" type="submit">{% trans "Login" %}</button>
         
         <input type="hidden" name="next" value="{{ next }}">
       </form>
 
       <p class="text-center">
-        <a href="{% url 'password_reset' %}" class="text-decoration-none">Lost password?</a>
+        <a href="{% url 'password_reset' %}" class="text-decoration-none">{% trans "Lost password?" %}</a>
       </p>
     </div>
   </div>

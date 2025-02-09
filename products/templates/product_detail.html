@@ -1,5 +1,6 @@
 {% load static %}
 {% load django_bootstrap5 %}
+{% load i18n %}
 <html>
   <head>
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
@@ -9,7 +10,7 @@
       onload="this.rel='stylesheet'"
       href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Work+Sans%3Awght%40400%3B500%3B700%3B900"/>
 
-    <title>Shobly</title>
+    <title>{% trans "Shobly" %}</title>
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
 
     <script src="{% static 'js/tailwindcss.js' %}"></script>
@@ -32,9 +33,10 @@
                   </defs>
                 </svg>
               </div>
-              <h2 class="text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em]">Shobly</h2>
+              <a href="{% url 'home:index' %}"><h2 class="text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em]">{% trans "Shobly" %}</h2></a>
             </div>
             <div class="flex flex-1 justify-end gap-8">
+              <a href="{% url 'cart:cart' %}">
               <button
                 class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 bg-[#f0f2f5] text-[#111518] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5"
               >
@@ -46,7 +48,28 @@
                   </svg>
                 </div>
               </button>
+              </a>
             </div>
+                      <!-- زر الترجمة -->
+          <div class="relative ml-4">
+            <button id="language-button" class="flex items-center text-gray-500 hover:text-blue-500 focus:outline-none">
+              <span>{% trans "Language" %}</span>
+              <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div id="language-menu" class="absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg hidden">
+              <a href="/en{{ request.path|slice:'3:' }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">{% trans "English" %}</a>
+              <a href="/ar{{ request.path|slice:'3:' }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">{% trans "Arabic" %}</a>
+              </div>
+          </div>
+          <script>
+            document.getElementById('language-button').addEventListener('click', function () {
+              var menu = document.getElementById('language-menu');
+              menu.classList.toggle('hidden');
+            });
+          </script>
           </header>
         <div class="gap-1 px-6 flex flex-1 justify-center py-5">
           <div class="layout-content-container flex flex-col max-w-[920px] flex-1">
@@ -71,7 +94,7 @@
             <h3 class="text-[#111518] tracking-light text-2xl font-bold leading-tight px-4 text-left pb-2 pt-5">
               {{ product.summary }}
             </h3>
-            <p class="text-[#60778a] text-sm font-normal leading-normal pb-3 pt-1 px-4">{{product.price}} EGP</p>
+            <p class="text-[#60778a] text-sm font-normal leading-normal pb-3 pt-1 px-4">{{product.price}} {% trans "EGP" %}</p>
             <div class="flex flex-wrap gap-x-8 gap-y-6 p-4">
               <div class="flex flex-col gap-2">
                 <p class="text-[#111518] text-4xl font-black leading-tight tracking-[-0.033em]">{{product_rate_avg.rating__avg}}</p>
@@ -90,7 +113,7 @@
                   {% endfor %}
                     
                 </div>
-                <p class="text-[#111518] text-base font-normal leading-normal">{{number_of_rater}} reviews</p>
+                <p class="text-[#111518] text-base font-normal leading-normal">{{number_of_rater}} {% trans "reviews" %}</p>
               </div>
               <div class="grid min-w-[200px] max-w-[400px] flex-1 grid-cols-[20px_1fr_40px] items-center gap-y-3">
                 {% for i in ratings_count %}
@@ -107,45 +130,65 @@
             <p class="text-[#111518] text-base font-normal leading-normal pb-3 pt-1 px-4">
             {{ product.description }}
             </p>
-            <h3 class="text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Available Quantity:{{product.amount}}</h3>
+            <h3 class="text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">{% trans "Available Quantity" %}:{{product.amount}}</h3>
             <div class="flex justify-stretch">
               <div class="flex flex-1 gap-3 flex-wrap px-4 py-3 justify-start">
-                <button
-                  class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#2094f3] text-white text-sm font-bold leading-normal tracking-[0.015em]"
-                >
-                  <span class="truncate">Add to Cart</span>
-                </button>
+                <form method="post" action="{% url 'cart:add_to_cart' product.slug %}" id="add-to-cart-form">
+                  {% csrf_token %}
+                  <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#2094f3] text-white text-sm font-bold leading-normal tracking-[0.015em]" type="submit">
+                    <span class="truncate">{% trans "Add to Cart" %}</span>
+                  </button>
+                </form>
+                <div id="success-message" class="hidden text-green-500 font-bold mt-2">{% trans "Successfully added 1 item to the cart!" %}</div>
+                <script>
+                document.getElementById('add-to-cart-form').addEventListener('submit', function(event) {
+                  event.preventDefault();
+                  fetch(this.action, {
+                  method: 'POST',
+                  body: new FormData(this),
+                  headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                  },
+                  })
+                  .then(response => {
+                  if (response.ok) {
+                    document.getElementById('success-message').classList.remove('hidden');
+                  }
+                  })
+                  .catch(error => console.error('Error:', error));
+                });
+                </script>
               </div>
             </div>
           </div>
-          <div class="layout-content-container flex flex-col w-[360px]">
-            <h3 class="text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Seller</h3>
+          <div class="layout-content-container flex flex-col w-[360px]" dir="{% if LANGUAGE_CODE == 'ar' %}rtl{% else %}ltr{% endif %}">
+            <h3 class="text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">{% trans "Seller" %}</h3>
             <div class="flex items-center gap-4 bg-white px-4 min-h-[72px] py-2">
               <div
                 class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-14 w-fit"
                 style="background-image: url('{% if user_img %}{{ user_img.url }}{% else %}{% static "img/4.png" %}{% endif %}');"
                 ></div>
               <div class="flex flex-col justify-center">
-                <p class="text-[#111518] text-base font-medium leading-normal line-clamp-1">company name:{{company_name}}.</p>
-                <p class="text-[#60778a] text-sm font-normal leading-normal line-clamp-2">product published by:{{product.user.username}}</p>
+                <p class="text-[#111518] text-base font-medium leading-normal line-clamp-1">{% trans "company name" %}:{{company_name}}.</p>
+                <p class="text-[#60778a] text-sm font-normal leading-normal line-clamp-2">{% trans "product published by" %}:{{product.user.username}}</p>
               </div>
             </div>
-            <h3 class="text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Product details</h3>
+            <h3 class="text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">{% trans "Product details" %}</h3>
             <div class="p-4 grid grid-cols-2">
               <div class="flex flex-col gap-1 border-t border-solid border-t-[#dbe1e6] py-4 pr-2">
-                <p class="text-[#60778a] text-sm font-normal leading-normal">Product Name</p>
+                <p class="text-[#60778a] text-sm font-normal leading-normal">{% trans "Product Name" %}</p>
                 <p class="text-[#111518] text-sm font-normal leading-normal">{{product.title}}</p>
               </div>
               <div class="flex flex-col gap-1 border-t border-solid border-t-[#dbe1e6] py-4 pl-2">
-                <p class="text-[#60778a] text-sm font-normal leading-normal">Price</p>
-                <p class="text-[#111518] text-sm font-normal leading-normal">{{product.price}} EGP</p>
+                <p class="text-[#60778a] text-sm font-normal leading-normal">{% trans "Price" %}</p>
+                <p class="text-[#111518] text-sm font-normal leading-normal">{{product.price}} {% trans "EGP" %}</p>
               </div>
               <div class="flex flex-col gap-1 border-t border-solid border-t-[#dbe1e6] py-4 pr-2">
-                <p class="text-[#60778a] text-sm font-normal leading-normal">Created At</p>
+                <p class="text-[#60778a] text-sm font-normal leading-normal">{% trans "Created At" %}</p>
                 <p class="text-[#111518] text-sm font-normal leading-normal">{{product.created_at}}</p>
               </div>
               <div class="flex flex-col gap-1 border-t border-solid border-t-[#dbe1e6] py-4 pr-2 col-span-2 pr-[50%]">
-                <p class="text-[#60778a] text-sm font-normal leading-normal">Category</p>
+                <p class="text-[#60778a] text-sm font-normal leading-normal">{% trans "Category" %}</p>
                 <p class="text-[#111518] text-sm font-normal leading-normal">{{product.catigory}}</p>
               </div>
             </div>
@@ -156,7 +199,7 @@
                 
                   
                   
-                <h3 class="text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Related Products</h3>
+                <h3 class="text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">{% trans "Related Products" %}</h3>
                 {% for i in related_products %}
                 
                 {% if i.avg_rating and i %}
@@ -164,11 +207,11 @@
                   
                 <div
                   class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl"
-                  style="background-image: url('{{i.img1.url}}');"></div>
+                  style="background-image: url('{{ i.img1.url }}');"></div>
                 <div>
-                  <a href="{% url 'products:product_detail' i.slug %}"><p class="text-[#111518] text-base font-medium leading-normal">title: {{i.title}}</p></a>
-                  <p class="text-[#60778a] text-sm font-normal leading-normal">price: {{i.price}}</p>
-                  <p class="text-[#60778a] text-sm font-normal leading-normal">rating: {{i.avg_rating}}</p>
+                  <a href="{% url 'products:product_detail' i.slug %}"><p class="text-[#111518] text-base font-medium leading-normal">{% trans "title" %}: {{i.title}}</p></a>
+                  <p class="text-[#60778a] text-sm font-normal leading-normal">{% trans "price" %}: {{i.price}}</p>
+                  <p class="text-[#60778a] text-sm font-normal leading-normal">{% trans "rating" %}: {{i.avg_rating}}</p>
                 </div>
                 {% endif %}
                 {% endfor %}

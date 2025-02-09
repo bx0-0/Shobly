@@ -1,0 +1,1155 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: ar\n"
+
+#: accounts/templates/registration/edit_profile.html:10
+#: accounts/templates/registration/edit_profile.html:15
+msgid "Edit Profile"
+msgstr "تعديل الملف الشخصي"
+
+#: accounts/templates/registration/edit_profile.html:34
+msgid "Save Changes"
+msgstr "حفظ التغييرات"
+
+#: accounts/templates/registration/logged_out.html:9
+msgid "Logged out!"
+msgstr "تم تسجيل الخروج!"
+
+#: accounts/templates/registration/logged_out.html:10
+msgid "Click here to login again."
+msgstr "اضغط هنا لتسجيل الدخول مرة أخرى."
+
+#: accounts/templates/registration/login.html:11
+#: accounts/templates/registration/login.html:49
+#: accounts/templates/registration/login.html:55
+#: accounts/templates/registration/signup.html:96
+msgid "Login"
+msgstr "تسجيل الدخول"
+
+#: accounts/templates/registration/login.html:29
+#: accounts/templates/registration/profile.html:12
+#: accounts/templates/registration/profile.html:36
+#: accounts/templates/registration/signup.html:9
+#: accounts/templates/registration/signup.html:94
+#: cart/templates/cart.html:132
+#: home/templates/home.html:9
+#: home/templates/home.html:37
+#: products/templates/create_product.html:31
+#: products/templates/product_detail.html:13
+#: products/templates/product_detail.html:36
+#: products/templates/product_list.html:11
+
+#: products/templates/product_prediction.html#: cart/templates/cart.html 
+#: home/templates/about_as.html
+msgid "Shobly"
+msgstr "شوبلي"
+
+#: accounts/templates/registration/login.html:32
+#: home/templates/about_as.html
+msgid "SignUp"
+msgstr "تسجيل"
+
+#: accounts/templates/registration/login.html:38
+msgid "Your username and password didn't match. Please try again."
+msgstr "اسم المستخدم وكلمة المرور غير متطابقين. يرجى المحاولة مرة أخرى."
+
+#: accounts/templates/registration/login.html:43
+msgid "Your account doesn't have access to this page. Please login with an account that has access."
+msgstr "حسابك لا يمتلك صلاحية الوصول إلى هذه الصفحة. يرجى تسجيل الدخول باستخدام حساب يمتلك صلاحية الوصول."
+
+#: accounts/templates/registration/login.html:45
+msgid "Please login to see this page."
+msgstr "يرجى تسجيل الدخول لعرض هذه الصفحة."
+
+#: accounts/templates/registration/login.html:61
+msgid "Lost password?"
+msgstr "هل فقدت كلمة المرور؟"
+
+#: accounts/templates/registration/profile.html:41
+#: home/templates/home.html:43
+#: products/templates/product_list.html:137
+#: products/templates/product_prediction.html
+msgid "Electronics"
+msgstr "إلكترونيات"
+
+#: accounts/templates/registration/profile.html:42
+#: home/templates/home.html:45
+#: products/templates/product_list.html:137
+#: products/templates/product_prediction.html
+msgid "Fashion"
+msgstr "موضة"
+
+#: accounts/templates/registration/profile.html:43
+#: home/templates/home.html:47
+msgid "Health"
+msgstr "صحة"
+
+#: accounts/templates/registration/profile.html:44
+#: home/templates/home.html:49
+msgid "Sports"
+msgstr "رياضة"
+
+#: accounts/templates/registration/profile.html:45
+#: home/templates/home.html:51
+msgid "Toys"
+msgstr "ألعاب"
+
+#: accounts/templates/registration/profile.html:52
+#: home/templates/home.html:58
+#: products/templates/create_product.html:46
+#: home/templates/about_as.html
+msgid "Sell"
+msgstr "بيع"
+
+#: accounts/templates/registration/profile.html:56
+#: home/templates/home.html:63
+#: products/templates/create_product.html:50
+#:products/templates/product_prediction.html
+#: home/templates/about_as.html
+msgid "welcome"
+msgstr "مرحبًا"
+
+#: accounts/templates/registration/profile.html:60
+#: accounts/templates/registration/signup.html:117
+#: home/templates/home.html:68
+#: products/templates/create_product.html:54
+msgid "Sign up"
+msgstr "تسجيل"
+
+#: accounts/templates/registration/profile.html:92
+msgid "About"
+msgstr "عن"
+
+#: accounts/templates/registration/profile.html:97
+msgid "no about found add some by edit your profile bottom"
+msgstr "لم يتم العثور على أي تفاصيل. أضف بعضها من خلال تعديل ملفك الشخصي."
+
+#: accounts/templates/registration/profile.html:111
+msgid "No city selected"
+msgstr "لم يتم اختيار مدينة"
+
+#: accounts/templates/registration/profile.html:121
+msgid "email"
+msgstr "البريد الإلكتروني"
+
+#: accounts/templates/registration/profile.html:129
+#: products/templates/product_detail.html:172
+msgid "company name"
+msgstr "اسم الشركة"
+
+#: accounts/templates/registration/profile.html:133
+msgid "edit"
+msgstr "تعديل"
+
+#: accounts/templates/registration/profile.html:136
+msgid "My Products"
+msgstr "منتجاتي"
+
+#: accounts/templates/registration/profile.html:141
+msgid "logout"
+msgstr "تسجيل الخروج"
+
+#: accounts/templates/registration/profile.html:150
+msgid "Privacy Policy"
+msgstr "سياسة الخصوصية"
+
+#: accounts/templates/registration/profile.html:152
+msgid "Terms of Service"
+msgstr "شروط الخدمة"
+
+#: accounts/templates/registration/signup.html:102
+msgid "Sign Up"
+msgstr "تسجيل"
+
+#: accounts/templates/registration/signup.html:108
+msgid "City"
+msgstr "المدينة"
+
+#: accounts/templates/registration/signup.html:110
+msgid "Select your city"
+msgstr "اختر مدينتك"
+
+#: cart/templates/cart.html:12
+#: cart/templates/cart.html:138
+msgid "Shopping Cart"
+msgstr "سلة التسوق"
+
+#: cart/templates/cart.html:23
+msgid "You need to add your PayPal email in the settings."
+msgstr "يجب عليك إضافة بريدك الإلكتروني على PayPal في الإعدادات."
+
+#: cart/templates/cart.html:32
+msgid "Invalid product price."
+msgstr "سعر المنتج غير صالح."
+
+#: cart/templates/cart.html:61
+msgid "Transaction"
+msgstr "المعاملة"
+
+#: cart/templates/cart.html:67
+msgid "Error processing the transaction."
+msgstr "حدث خطأ أثناء معالجة المعاملة."
+
+#: cart/templates/cart.html:110
+#: cart/templates/cart.html:121
+msgid "Error completing the order:"
+msgstr "حدث خطأ أثناء إتمام الطلب:"
+
+#: cart/templates/cart.html:116
+msgid "Order completed successfully:"
+msgstr "تم إتمام الطلب بنجاح:"
+
+#: cart/templates/cart.html:146
+msgid "Item price:"
+msgstr "سعر المنتج:"
+
+#: cart/templates/cart.html:147
+msgid "Quantity:"
+msgstr "الكمية:"
+
+#: cart/templates/cart.html:148
+msgid "Total:"
+msgstr "الإجمالي:"
+
+#: cart/templates/cart.html:161
+msgid "Purchase"
+msgstr "شراء"
+
+#: cart/templates/cart.html:167
+msgid "Continue Shopping"
+msgstr "متابعة التسوق"
+
+#: cart/templates/cart.html:176
+msgid "Close"
+msgstr "إغلاق"
+
+#: home/templates/home.html:75
+#: products/templates/create_product.html:61
+#: products/templates/product_detail.html:56
+#: products/templates/product_prediction.html
+#: home/templates/about_as.html
+msgid "Language"
+msgstr "اللغة"
+#: home/templates/home.html:82
+#: home/templates/home.html:82
+#: products/templates/create_product.html:68
+#: products/templates/product_detail.html:63
+#: home/templates/about_as.html
+msgid "English"
+msgstr "الإنجليزية"
+
+#: home/templates/home.html:83
+#: products/templates/create_product.html:69
+#: products/templates/product_detail.html:64
+#: products/templates/product_list.html:75
+#: products/templates/product_prediction.html
+#: home/templates/about_as.html
+
+msgid "Arabic"
+msgstr "العربية"
+
+#: home/templates/home.html:106
+msgid "Buy and sell with peace of mind"
+msgstr "اشترِ وبِع بثقة وراحة بال"
+
+#: home/templates/home.html:110
+#: home/templates/home.html:133
+msgid "From secure payments to our 24/7 customer service, we've got you covered. And if you're selling, we've got your back with Seller Protection, too."
+msgstr "من المدفوعات الآمنة إلى خدمة العملاء على مدار الساعة، نحن نوفر لك كل شيء. وإذا كنت تبيع، نحن ندعمك بحماية البائع أيضًا."
+
+#: home/templates/home.html:116
+msgid "Create Product Now"
+msgstr "أنشئ منتج الآن"
+
+#: home/templates/home.html:121
+#: home/templates/home.html:155
+msgid "Start selling"
+msgstr "ابدأ البيع"
+
+#: home/templates/home.html:131
+msgid "Why buy on Shobly?"
+msgstr "لماذا تشتري من شوبلي؟"
+
+#: home/templates/home.html:144
+msgid "Easy selling, no hassles"
+msgstr "البيع بسهولة وبدون متاعب"
+
+#: home/templates/home.html:148
+msgid "Join millions of sellers and list your items for free in minutes. Plus, enjoy low fees and get paid instantly with our secure payment system."
+msgstr "انضم إلى ملايين البائعين وقم بإدراج منتجاتك مجانًا في دقائق. بالإضافة إلى ذلك، استمتع برسوم منخفضة واحصل على أموالك فورًا باستخدام نظام الدفع الآمن لدينا."
+
+#: products/templates/create_product.html:9
+msgid "Document"
+msgstr "وثيقة"
+
+#: products/templates/create_product.html:37
+msgid "Your Products"
+msgstr "منتجاتك"
+
+#: products/templates/create_product.html:85
+msgid "Create Product"
+msgstr "إنشاء منتج"
+
+#: products/templates/create_product.html:89
+msgid "Create"
+msgstr "إنشاء"
+
+#: products/templates/product_detail.html:97
+#: products/templates/product_detail.html:184
+msgid "EGP"
+msgstr "جنيه مصري"
+
+#: products/templates/product_detail.html:116
+msgid "reviews"
+msgstr "المراجعات"
+
+#: products/templates/product_detail.html:133
+msgid "Available Quantity"
+msgstr "الكمية المتوفرة"
+
+#: products/templates/product_detail.html:139
+msgid "Add to Cart"
+msgstr "إضافة إلى السلة"
+
+#: products/templates/product_detail.html:142
+msgid "Successfully added 1 item to the cart!"
+msgstr "تمت إضافة عنصر واحد إلى السلة بنجاح!"
+
+#: products/templates/product_detail.html:165
+msgid "Seller"
+msgstr "البائع"
+
+#: products/templates/product_detail.html:173
+msgid "product published by"
+msgstr "المنتج نشر بواسطة"
+
+#: products/templates/product_detail.html:176
+msgid "Product details"
+msgstr "تفاصيل المنتج"
+
+#: products/templates/product_detail.html:179
+msgid "Product Name"
+msgstr "اسم المنتج"
+
+#: products/templates/product_detail.html:183
+#: products/forms.py:10
+msgid "Price"
+msgstr "السعر"
+
+#: products/templates/product_detail.html:187
+msgid "Created At"
+msgstr "تاريخ الإنشاء"
+
+#: products/templates/product_detail.html:191
+#: products/forms.py:12
+msgid "Category"
+msgstr "الفئة"
+
+#: products/templates/product_detail.html:202
+msgid "Related Products"
+msgstr "منتجات ذات صلة"
+
+#: products/templates/product_detail.html:212
+msgid "title"
+msgstr "العنوان"
+
+#: products/templates/product_detail.html:213
+#: products/templates/product_list.html:117
+#: products/templates/product_prediction.html
+msgid "price"
+msgstr "السعر"
+
+#: products/templates/product_detail.html:214
+msgid "rating"
+msgstr "التقييم"
+
+#: products/templates/product_list.html:42
+
+#: products/templates/product_prediction.html
+msgid "Search products"
+msgstr "البحث عن المنتجات"
+
+#: products/templates/product_list.html:47
+
+#: products/templates/product_prediction.html
+msgid "Search"
+msgstr "بحث"
+
+#: products/templates/product_list.html:88
+
+#: products/templates/product_prediction.html
+msgid "Home"
+msgstr "الرئيسية"
+
+#: products/templates/product_list.html:90
+
+#: products/templates/product_prediction.html
+msgid "products"
+msgstr "المنتجات"
+
+#: products/templates/product_list.html:93
+
+#: products/templates/product_prediction.html
+msgid "Products"
+msgstr "المنتجات"
+
+#: products/templates/product_list.html:98
+
+#: products/templates/product_prediction.html#: products/templates/product_list.html:101
+#: products/templates/product_prediction.html
+msgid "Search by category"
+msgstr "البحث حسب الفئة"
+
+#: products/templates/product_prediction.html
+msgid "All Categories"
+msgstr "كل الفئات"
+
+#: products/templates/product_list.html:106
+#: products/templates/product_prediction.html
+msgid "Filter"
+msgstr "تصفية"
+
+#: products/templates/product_list.html:116
+#: products/templates/product_prediction.html
+msgid "name"
+msgstr "الاسم"
+
+#: products/templates/product_list.html:118
+#: products/templates/product_prediction.html
+msgid "amount"
+msgstr "الكمية"
+
+#: products/templates/product_list.html:119
+#: products/templates/product_prediction.html
+msgid "category"
+msgstr "الفئة"
+
+#: products/templates/product_list.html:122
+#: products/templates/product_prediction.html
+msgid "View Details"
+msgstr "عرض التفاصيل"
+
+#: products/templates/product_list.html:123
+#: products/templates/product_prediction.html
+msgid "Luggage & Travel Accessories"
+msgstr "حقائب وإكسسوارات السفر"
+
+#: products/templates/product_list.html:124
+#: products/templates/product_prediction.html
+msgid "Jewelry & Watches"
+msgstr "المجوهرات والساعات"
+
+#: products/templates/product_list.html:125
+#: products/templates/product_prediction.html
+msgid "Music & Movies"
+msgstr "الموسيقى والأفلام"
+
+#: products/templates/product_list.html:126
+#: products/templates/product_prediction.html
+msgid "Baby Products"
+msgstr "منتجات الأطفال"
+
+#: products/templates/product_list.html:127
+#: products/templates/product_prediction.html
+msgid "Garden & Outdoor"
+msgstr "الحديقة والهواء الطلق"
+
+#: products/templates/product_list.html:128
+#: products/templates/product_prediction.html
+msgid "Groceries"
+msgstr "البقالة"
+
+#: products/templates/product_list.html:129
+#: products/templates/product_prediction.html
+msgid "Pet Supplies"
+msgstr "مستلزمات الحيوانات الأليفة"
+
+#: products/templates/product_list.html:130
+#: products/templates/product_prediction.html
+msgid "Office Supplies"
+msgstr "اللوازم المكتبية"
+
+#: products/templates/product_list.html:131
+#: products/templates/product_prediction.html
+msgid "Automotive"
+msgstr "السيارات"
+
+#: products/templates/product_list.html:132
+#: products/templates/product_prediction.html
+msgid "Health & Household"
+msgstr "الصحة والمنزل"
+
+#: products/templates/product_list.html:133
+#: products/templates/product_prediction.html
+msgid "Toys & Games"
+msgstr "الألعاب"
+
+#: products/templates/product_list.html:134
+#: products/templates/product_prediction.html
+msgid "Books"
+msgstr "الكتب"
+
+#: products/templates/product_list.html:135
+#: products/templates/product_prediction.html
+msgid "Beauty & Personal Care"
+msgstr "الجمال والعناية الشخصية"
+
+#: products/templates/product_list.html:136
+#: products/templates/product_prediction.html
+msgid "Sports & Outdoors"
+msgstr "الرياضة والهواء الطلق"
+
+
+#: products/templates/product_list.html:138
+#: products/templates/product_prediction.html
+msgid "Home Appliances"
+msgstr "الأجهزة المنزلية"
+
+#: products/templates/product_list.html:139
+#: products/templates/product_prediction.html
+msgid "Mobile Phones"
+msgstr "الهواتف المحمولة"
+
+#: products/templates/product_list.html:140
+#: products/templates/product_prediction.html
+msgid "Computers & Tablets"
+msgstr "أجهزة الكمبيوتر والأجهزة اللوحية"
+
+#: products/forms.py:8
+msgid "Product Title"
+msgstr "عنوان المنتج"
+
+#: products/forms.py:9
+#:ai_predict/forms.py
+msgid "Description"
+msgstr "الوصف"
+
+
+
+#: products/forms.py:11
+msgid "Summary"
+msgstr "ملخص"
+
+
+#: products/forms.py:13
+msgid "First Image"
+msgstr "الصورة الأولى"
+
+#: products/forms.py:14
+msgid "Second Image"
+msgstr "الصورة الثانية"
+
+#: products/forms.py:17
+msgid "Enter a detailed description of the product."
+msgstr "أدخل وصفًا تفصيليًا للمنتج."
+
+#: products/forms.py:18
+msgid "Enter the price of the product in numbers only."
+msgstr "أدخل سعر المنتج بالأرقام فقط."
+
+#: products/forms.py:19
+msgid "Write a brief summary of the product."
+msgstr "اكتب ملخصًا موجزًا للمنتج."
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "6th of October City"
+msgstr "مدينة 6 أكتوبر"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Abnūb"
+msgstr "أبنوب"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Abu Suweir-el-Mahatta"
+msgstr "أبو صوير المحطة"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Abū Kabīr"
+msgstr "أبو كبير"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Abū Qurqāş"
+msgstr "أبو قرقاص"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Abū Tīj"
+msgstr "أبو تيج"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Abū al Maţāmīr"
+msgstr "أبو المطامير"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Abū an Numrus"
+msgstr "أبو النمرس"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Abū Ţisht"
+msgstr "أبو طشت"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Abū Ḩammād"
+msgstr "أبو حماد"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Abū Ḩummuş"
+msgstr "أبو حمص"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Ad Dilinjāt"
+msgstr "الدلنجات"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Aga"
+msgstr "أجا"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Ain Sukhna"
+msgstr "العين السخنة"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Akhmīm"
+msgstr "أخميم"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al Badrashayn"
+msgstr "البدرشين"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al Badārī"
+msgstr "البداري"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al Balyanā"
+msgstr "البلينا"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al Bawīţī"
+msgstr "البويطي"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al Bayāḑīyah"
+msgstr "البياضية"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al Başalīyah Baḩrī"
+msgstr "البصيلية بحري"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al Burj"
+msgstr "البرج"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al Bājūr"
+msgstr "الباجور"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al Fashn"
+msgstr "الفشن"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al Fayyum"
+msgstr "الفيوم"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al Ghanāyim"
+msgstr "الغنايم"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al Ibrāhīmīyah"
+msgstr "الإبراهيمية"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al Jammālīyah"
+msgstr "الجمالية"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al Khuşūş"
+msgstr "الخصوص"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al Khānkah"
+msgstr "الخانكة"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al Khārjah"
+msgstr "الخارجة"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al Mansurah"
+msgstr "المنصورة"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al Manzalah"
+msgstr "المنزلة"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al Marāghah"
+msgstr "المراغة"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al Maţarīyah"
+msgstr "المطرية"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al Maḩallah al Kubrá"
+msgstr "المحلة الكبرى"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al Maḩmūdīyah"
+msgstr "المحمودية"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al Minshāh"
+msgstr "المنشأة"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al Qanāyāt"
+msgstr "القنايات"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al Qanāţir al Khayrīyah"
+msgstr "القناطر الخيرية"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al Qanţarah"
+msgstr "القنطرة"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al Qaşşāşīn"
+msgstr "القصاصين"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al Qurayn"
+msgstr "القرين"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al Quşayr"
+msgstr "القصير"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al Qūşīyah"
+msgstr "القوصية"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al Waqf"
+msgstr "الوقف"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al Wāsiţah"
+msgstr "الواسطة"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al Ḩammām"
+msgstr "الحمام"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al Ḩawāmidīyah"
+msgstr "الحوامدية"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al Ḩusaynīyah"
+msgstr "الحسينية"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al Ḩāmūl"
+msgstr "الحامول"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al ‘Ayyāţ"
+msgstr "العياط"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al ‘Idwah"
+msgstr "العدوة"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al ‘Āshir min Ramaḑān"
+msgstr "العاشر من رمضان"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al-'Ubūr"
+msgstr "العبور"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al-Khārijah"
+msgstr "الخارجة"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Al-Minyā al-Jadīdah"
+msgstr "المنيا الجديدة"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Alexandria"
+msgstr "الإسكندرية"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "An Nāşirīyah"
+msgstr "الناصرية"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "An Nūbārīyah"
+msgstr "النوبارية"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "An-Najaylah"
+msgstr "النجيلة"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Ar Radīsīyah Qiblī"
+msgstr "الريسية قبلي"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Ar Raḩmānīyah"
+msgstr "الرحمانية"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Ar Riyāḑ"
+msgstr "الرياض"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Ar-Rawḍah"
+msgstr "الروضة"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Armant"
+msgstr "أرمنت"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Arīsh"
+msgstr "العريش"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "As Sallūm"
+msgstr "السلوم"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "As Sanţah"
+msgstr "السنطة"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "As Sarw"
+msgstr "السرور"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "As Sibā‘īyah"
+msgstr "السباعية"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "As Sinbillāwayn"
+msgstr "السنبلاوين"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "As Sāḩil"
+msgstr "الساحل"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Ash Shaykh Zuwayd"
+msgstr "الشيخ زويد"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Ash Shuhadā’"
+msgstr "الشهداء"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Ash-Shaykh Zāyid"
+msgstr "الشيخ زايد"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Ashmūn"
+msgstr "أشمون"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Assiut"
+msgstr "أسيوط"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Aswān"
+msgstr "أسوان"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "At Tall al Kabīr"
+msgstr "التل الكبير"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Awlād Şaqr"
+msgstr "أولاد صقر"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Awsīm"
+msgstr "أوسيم"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Az Zarqā"
+msgstr "الزرقا"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Az Zaynīyah Qiblī"
+msgstr "الزينية قبلي"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Aş Şaff"
+msgstr "الصف"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Aş Şalāḩāt"
+msgstr "الصلاحات"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Aş Şāliḩīyah al Jadīdah"
+msgstr "الصالحية الجديدة"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Aţ Ţārif"
+msgstr "الطارق"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Aţfīḩ"
+msgstr "أطفيح"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Badr"
+msgstr "بدر"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Balţīm"
+msgstr "بلطيم"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Banhā"
+msgstr "بنها"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Banī Mazār"
+msgstr "بني مزار"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Banī Suwayf"
+msgstr "بني سويف"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Banī Suwayf al Jadīdah"
+msgstr "بني سويف الجديدة"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Banī ‘Ubayd"
+msgstr "بني عبيد"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Basyūn"
+msgstr "بسيون"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Bibā"
+msgstr "ببا"
+
+#: accounts/profile.html
+#: accounts/forms.py
+msgid "Bilbeis"
+msgstr "بلبيس"
+
+#: products/templates/product_prediction.html
+msgid "Product Prediction"
+msgstr "تنبؤ المنتج"
+
+#: products/templates/product_prediction.html
+msgid "Predict Products"
+msgstr "تنبؤ المنتجات"
+
+#: products/templates/product_prediction.html
+msgid "Minimum Price"
+msgstr "أقل سعر"
+
+#: products/templates/product_prediction.html
+msgid "Maximum Price"
+msgstr "أعلى سعر"
+
+#: products/templates/product_prediction.html
+msgid "Select a category"
+msgstr "اختر فئة"
+
+
+#: products/templates/product_prediction.html
+msgid "Enter product description"
+msgstr "أدخل وصف المنتج"
+
+#: home/templates/about_as.html
+msgid "About Us"
+msgstr "حولنا"
+
+
+
+#: home/templates/about_as.html
+msgid "Project Overview"
+msgstr "نظرة عامة عن المشروع"
+
+#: home/templates/about_as.html
+msgid "Our project is an innovative e-commerce platform that allows users to securely buy, sell, and list products. Developed by a dedicated team of students, it ensures a seamless trading experience."
+msgstr "مشروعنا هو منصة تجارة إلكترونية مبتكرة تتيح للمستخدمين شراء وبيع وإدراج المنتجات بأمان. تم تطويره بواسطة فريق مخلص من الطلاب لضمان تجربة تداول سلسة."
+
+#: home/templates/about_as.html
+msgid "Technology Used"
+msgstr "التقنيات المستخدمة"
+
+#: home/templates/about_as.html
+msgid "Frontend:"
+msgstr "واجهة المستخدم:"
+
+#: home/templates/about_as.html
+msgid "Backend:"
+msgstr "الواجهة الخلفية:"
+
+#: home/templates/about_as.html
+msgid "AI:"
+msgstr "الذكاء الاصطناعي:"
+
+#: home/templates/about_as.html
+msgid "Features"
+msgstr "الخصائص"
+
+#: home/templates/about_as.html
+msgid "AI-powered product recommendations"
+msgstr "توصيات المنتجات باستخدام الذكاء الاصطناعي"
+
+#: home/templates/about_as.html
+msgid "Secure and fast transactions"
+msgstr "معاملات آمنة وسريعة"
+
+#: home/templates/about_as.html
+msgid "User-friendly responsive design"
+msgstr "تصميم سهل الاستخدام ومتجاوب"
+
+#:ai_predict/prediction_form.html
+msgid "Predict"
+msgstr "التنبؤ الآن"
+
+#:ai_predict/prediction_form.html
+msgid "Predict Now With AI"
+msgstr "التنبؤ الآن باستخدام الذكاء الاصطناعي"
+
+#:home/templates/home.html
+msgid "Predict your perfect product using AI"
+msgstr "تنبؤ بمنتجك المثالي باستخدام الذكاء الاصطناعي"
+
+#:accounts/forms.py
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+#:accounts/forms.py
+msgid "Email not required"
+msgstr "البريد الإلكتروني غير مطلوب"
+
+#:products/user_products.html
+msgid "No products found"
+msgstr "لم يتم العثور على منتجات"
+
+#:products/user_products.html
+msgid "Edit Details"
+msgstr "تعديل التفاصيل"
+
+#:home/templates/home.html
+msgid "About us"
+msgstr "من نحن"
+
+#:ai_predict/templates/prediction_list.html
+msgid "Prediction Products"
+msgstr "منتجات التنبؤ"

@@ -1,50 +1,160 @@
 from django.shortcuts import redirect, render
-from .models import Product
+from .models import Product, Category
 from .forms import ProductForm
 from accounts.models import Profile
 from django.db.models import Avg, Count
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from .filters import ProductFilter
+from django.contrib import messages
 
-# دي الفيو بتاعت إنشاء المنتج الجديد
+
 def create_product(request):
-    # لو ال request نوعه POST يعني في فورم جاي من اليوزر
-    if request.method == 'POST':
-        form = ProductForm(request.POST, request.FILES)
-        # لو الفورم صح و مفيش مشاكل فيه
-        if form.is_valid():
-            # هنسيف البيانات في الداتا بيز
-            product = form.save()
-            # بعد ما نعمل المنتج نوديه على صفحة التفاصيل بتاعته باستخدام ال slug بتاعه
-            return redirect('product_detail', slug = product.slug)
-    else:
-        # لو مش POST يبقى هنخلي الفورم فاضي علشان اليوزر يدخل البيانات
-        form = ProductForm()
-    # هنرجع الصفحة بتاعت create_product مع الفورم
-    return render(request, 'create_product.html', {'form': form})
 
-# دي الفيو بتاعت عرض تفاصيل المنتج
+    profile = Profile.objects.get(user=request.user)
+
+    if not profile.paypal_email:
+        messages.error(
+            request,
+            "You need to add a PayPal email to your profile before creating a product.",
+        )
+        return redirect("accounts:edit-profile")
+
+    if request.method == "POST":
+        form = ProductForm(request.POST, request.FILES)
+
+        if form.is_valid():
+
+            product = form.save(commit=False)
+            product.user = request.user
+            product.save()
+
+            return redirect("products:product_detail", slug=product.slug)
+    else:
+
+        form = ProductForm()
+
+    return render(request, "create_product.html", {"form": form})
+
+
 def product_detail(request, slug):
-    # هنا هنجيب المنتج من الداتا بيز باستخدام ال slug
+
     product = Product.objects.get(slug=slug)
-    # هنجلب اليوزر اللي هو المالك بتاع المنتج
+
     user = product.user
-    # هنا بنجيب صورة البروفايل بتاعته من جدول البروفايل
+
     user_img = Profile.objects.get(user=user).ProfileImg
-    # و بنجيب اسم الشركة اللي تابع ليها اليوزر
+
     company_name = Profile.objects.get(user=user).company_name
-    # هنجيب المنتجات المتشابهة في الفئة لكن مش ده المنتج نفسه
-    related_products = Product.objects.filter(catigory=product.catigory).exclude(slug=slug).annotate(avg_rating=Avg('ratings__rating')).order_by('-avg_rating')
-    # هنحسب المعدل المتوسط للتقييمات
-    product_rate_avg = product.ratings.aggregate(Avg('rating'))
-    # لو المعدل المتوسط مش موجود (يعني المنتج لسه مفيش تقييمات)، هنخليه 0
-    if product_rate_avg['rating__avg'] is None:
-        product_rate_avg['rating__avg'] = 0
-    # هنجيب عدد التقييمات لكل درجة من درجات التقييم
-    ratings_count = product.ratings.values('rating').annotate(count=Count('rating')).order_by('-rating')
-    # هنجيب عدد الناس اللي قيموا المنتج
+
+    related_products = (
+        Product.objects.filter(catigory=product.catigory)
+        .exclude(slug=slug)
+        .annotate(avg_rating=Avg("ratings__rating"))
+        .order_by("-avg_rating")
+    )
+
+    product_rate_avg = product.ratings.aggregate(Avg("rating"))
+
+    if product_rate_avg["rating__avg"] is None:
+        product_rate_avg["rating__avg"] = 0
+
+    ratings_count = (
+        product.ratings.values("rating")
+        .annotate(count=Count("rating"))
+        .order_by("-rating")
+    )
+
     number_of_rater = product.ratings.count()
 
-    # هنا بنعرض النتيجة في الكونسول علشان نعرف لو فيه مشكلة ولا لأ
-    print(range(1, int(product_rate_avg['rating__avg'])))
-    
-    # هنرجع صفحة التفاصيل مع كل البيانات اللي محتاجينها
-    return render(request, 'product_detail.html', {'product': product, 'user_img': user_img, 'company_name': company_name,'ratings_count': ratings_count, 'related_products': related_products,'product_rate_avg': product_rate_avg, 'number_of_rater': number_of_rater,'int_avg_rate':range(0, int(product_rate_avg['rating__avg']))})
+    return render(
+        request,
+        "product_detail.html",
+        {
+            "product": product,
+            "user_img": user_img,
+            "company_name": company_name,
+            "ratings_count": ratings_count,
+            "related_products": related_products,
+            "product_rate_avg": product_rate_avg,
+            "number_of_rater": number_of_rater,
+            "int_avg_rate": range(0, int(product_rate_avg["rating__avg"])),
+        },
+    )
+
+
+def product_list(request):
+
+    products = Product.objects.filter(amount__gt=0)
+
+    product_filter = ProductFilter(request.GET, queryset=products)
+    filtered_products = product_filter.qs
+
+    paginator = Paginator(filtered_products, 10)
+    page = request.GET.get("page")
+    try:
+        paginated_products = paginator.page(page)
+    except PageNotAnInteger:
+
+        paginated_products = paginator.page(1)
+    except EmptyPage:
+
+        paginated_products = paginator.page(paginator.num_pages)
+
+    categories = Category.objects.all()
+
+    return render(
+        request,
+        "product_list.html",
+        {
+            "products": paginated_products,
+            "filter": product_filter,
+            "categories": categories,
+        },
+    )
+
+
+def delete_product(request, slug):
+
+    product = Product.objects.get(slug=slug, user=request.user)
+
+    product.delete()
+
+    return redirect("products:user_products")
+
+
+def edit_product(request, slug):
+    product = Product.objects.get(slug=slug, user=request.user)
+    if request.method == "POST":
+        form = ProductForm(request.POST, request.FILES, instance=product)
+        if form.is_valid():
+            product = form.save()
+            return redirect("products:product_detail", slug=product.slug)
+    else:
+        form = ProductForm(instance=product)
+
+    return render(request, "create_product.html", {"form": form})
+
+
+def user_products(request):
+
+    product_filter = ProductFilter(
+        request.GET, queryset=Product.objects.filter(user=request.user)
+    )
+
+    filtered_products = product_filter.qs
+
+    paginator = Paginator(filtered_products, 5)
+    page = request.GET.get("page")
+    try:
+
+        products = paginator.page(page)
+    except PageNotAnInteger:
+
+        products = paginator.page(1)
+    except EmptyPage:
+
+        products = paginator.page(paginator.num_pages)
+
+    return render(
+        request, "user_products.html", {"products": products, "filter": product_filter}
+    )
