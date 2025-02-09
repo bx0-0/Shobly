@@ -19,39 +19,6 @@ Shobly is an innovative e-commerce platform that allows users to securely buy, s
 - **AI**: Similarity-based algorithms for product recommendations.
 - **Shipping Simulation**: Custom script to simulate shipping company operations.
 
-## Models
-- **Cart**: Represents the shopping cart with fields for user, product, quantity, and creation date.
-- **Product**: Represents the product with fields for title, description, price, images, category, and more.
-- **Profile**: Represents the user profile with fields for PayPal email, city, and company name.
-- **Shipping**: Represents the shipping details with fields for tracking ID, status, and delivery date.
-
-## Views
-- **create_product**: Handles the creation of new products.
-- **product_detail**: Displays detailed information about a product.
-- **product_list**: Lists all available products with filtering and pagination.
-- **delete_product**: Deletes a product.
-- **edit_product**: Edits an existing product.
-- **user_products**: Lists products created by the logged-in user.
-- **recommend_products**: Handles AI-based product recommendations.
-- **shipping_status**: Displays the shipping status of a product.
-
-## Templates
-- **create_product.html**: Form for creating a new product.
-- **product_detail.html**: Displays detailed information about a product.
-- **product_list.html**: Lists all available products.
-- **user_products.html**: Lists products created by the logged-in user.
-- **product_recommendations.html**: Displays AI-based product recommendations.
-- **cart.html**: Displays the shopping cart.
-- **about_as.html**: Provides information about the project and its features.
-- **home.html**: The home page of the application.
-- **login.html**: User login form.
-- **profile.html**: User profile page.
-- **signup.html**: User signup form.
-- **shipping_status.html**: Displays the shipping status of a product.
-
-## Translation Files
-- **django.po**: Contains translations for various strings used in the application, supporting multiple languages including Arabic.
-
 ## Installation
 ### Prerequisites
 - Python 3.8+
